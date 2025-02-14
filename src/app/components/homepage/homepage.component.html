@@ -1,0 +1,155 @@
+
+<body>
+    <div class="nav">
+        <button class="btn" (click)="showContent('despre-noi')">Despre noi</button>
+        <button class="btn" (click)="showContent('contact')">Contact</button>
+    </div>
+   
+    
+<div  *ngIf="activeSection === 'despre-noi'"   id="despre-noi">
+ 
+<div class="card">
+    <div class="card-header">
+        <div class="header-content">
+            <div class="text-content">
+                <h1>Dotări</h1>
+                <h2>MedicaNova Hospital</h2>
+            </div>
+            <div class="image-content">
+                <img src="https://elytis-hospital.ro/wp-content/uploads/2024/11/block-1-1.png" alt="" height="331" width="452">
+            </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <p>MedicaNova Hospital are o suprafață totală de 4500mp și beneficiază de personal medical de excepție, tehnologie și echipamente medicale de ultimă generație.</p>
+        <p>MedicaNova Hospital dispune de echipament medical performant, făcând posibile proceduri complexe. Spitalul include spitalizare de zi, farmacie, săli de tratament și multe secții specializate pe diverse domenii.</p>
+        <p>Toate intervențiile realizate aici sunt menite să asigure o cât mai bună calitate a vieții pacientului și persoanelor apropiate acestuia, în paralel cu tratamentele active curative. Întreg personalul clinic este instruit în modele de comunicare empatică și suport emoțional și poate construi o relație terapeutică eficientă cu pacientul și familia acestuia.</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <div class="header-content">
+            <div class="text-content">
+                <h1>Spitalizare</h1>
+                <h2>de o zi</h2>
+            </div>
+            <div class="image-content">
+                <img src="https://elytis-hospital.ro/wp-content/themes/victor-child/assets/img/spitalizare.png" alt="">                </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <h3>MedicaNova Hospital vă oferă un serviciu tip “spitalizare de zi”, în următoarele cazuri:</h3>
+        <p>1.Diagnosticul nu poate fi stabilit şi respectiv aplicat în spitalizarea de zi;</p>
+        <p>2.Tratamentul nu poate fi stabilit şi respectiv aplicat în spitalizarea de zi;</p>
+        <p>3.Alte situaţii justificate de către medicul care efectuează şi avizate de Şef Secţie sau Director Medical</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <div class="header-content">
+            <div class="text-content">
+                <h1>Sterilizare</h1>
+            </div>
+            <div class="image-content">
+                <img src="	https://elytis-hospital.ro/wp-content/themes/victor-child/assets/img/sterilizare.png" alt="">                </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <p>Obiectivul principal al secţiei de sterilizare este de a asigura reprocesarea instrumentelor şi echipamentelor medicale reutilizabile şi de a garanta sterilitatea acestora.
+            Protecţia pacienţilor este esenţială pentru activitatea noastră.
+            Secţia dispune de aparatură modernă care oferă următoarele servicii:</p>
+            <p>– spălare cu ultrasunete</p>
+            <p>– spălare şi dezinfecţie automată</p>
+            <p>– ambalare truse</p>
+            <p>– sterilizare cu abur</p>
+            <p>– sterilizare cu oxid de etilenă</p>
+            <p>
+            Fiecare pas al acestor procese este monitorizat, documentat şi validat, asigurând calitatea şi eficienţa actului de sterilizare.
+            Ca departament de sterilizare centralizată avem relaţii de colaborare atât cu blocul operator cât şi cu toate secţiile instituţiei, răspunzând cu promtitudine tuturor solicitărilor.</p>
+    </div>
+</div>
+</div>
+
+
+
+<div  *ngIf="activeSection === 'contact'"  id="contact">
+    <div class="card">
+        <div class="card-header">
+            <h1>Contact MedicaNova Hospital</h1>
+        </div>
+        <div class="card-content">
+            <p><strong>Adresă:</strong> Strada Gheorghe Săulescu 43 A, Iași 700010</p>
+            <p><strong>Telefon:</strong> 0332 803 783 / 0332 803 793</p>
+            <p><strong>Email:</strong> info&#64;medicanova-hospital.ro</p>
+        </div>
+    </div>
+    
+
+
+  
+    
+    
+    
+</div>
+
+<div *ngIf="activeSection === 'slider'"  id="slider" class="slider-container">
+    <div class="slider">
+        <div *ngFor="let slide of slides; let i = index" 
+            class="slide"
+            [ngClass]="{'active': i === currentSlide}"
+            [style.backgroundImage]="'url(' + slide.imageUrl + ')'">
+            
+            <!-- Text suprapus pe imagine -->
+            <div class="slide-text">
+                <h1>{{ slide.title }}</h1>
+                <p>{{ slide.description }}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <div *ngIf="activeSection === 'slider'"  id="slider"  class="lab-info">
+        <div class="lab-section">
+            <div class="text">
+                <h2>Ce tipuri de analize facem</h2>
+                <p>
+                    Echipa MedicaNova are competențe în toate domeniile specifice laboratorului: 
+                    hematologie, biochimie medicală, imunologie, microbiologie, biologie moleculară, 
+                    precum și în domeniul calității.
+                </p>
+            </div>
+            <div class="image">
+                <img src="https://mhospital.ro/wp-content/uploads/2021/10/m-hospital-m-laborator-analize-800x455-1.jpg" alt="Analize medicale">
+            </div>
+    
+            <div class="text">
+                <h2>Standard de calitate, obligatorii</h2>
+                <p>
+                    La edicaNova menținem cele mai înalte standarde de calitate, certificate 
+                    de efectuarea controalelor interne și de participarea la controale externe.
+                </p>
+            </div>
+            <div class="image">
+                <img src="https://mhospital.ro/wp-content/uploads/2021/10/m-hospital-m-laborator-standarde-800x455-1.jpg" alt="Standard de calitate">
+            </div>
+    
+            <div class="text">
+                <h2>Echipa de specialiști MedicaNova</h2>
+                <p>
+                    <strong>Dr. Maria Popescu</strong><br>
+                    Medic primar medicină de laborator<br>
+                    Șef de laborator
+                </p>
+            </div>
+            <div class="image">
+                <img src="https://mhospital.ro/wp-content/uploads/2021/10/m-hospital-m-laborator-diagnostic-800x455-1.jpg" alt="Echipa de specialiști">
+            </div>
+        </div>
+    </div>
+
+</body> 
