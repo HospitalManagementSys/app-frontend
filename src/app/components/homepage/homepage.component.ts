@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectorRef,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'app-homepage',
@@ -36,6 +43,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
     this.startAutoSlide();
+    document.addEventListener('slider', this.showSlider.bind(this));
   }
 
   startAutoSlide() {
@@ -53,12 +61,23 @@ export class HomepageComponent implements OnInit {
       (this.currentSlide - 1 + this.slides.length) % this.slides.length;
   }
   constructor(private cdRef: ChangeDetectorRef) {}
-  activeSection: string = 'slider'; // Inițial, se afișează secțiunea "slider"
+
+  @Input() activeSection: string = 'slider'; // Primește secțiunea activă de la AppComponent
+  @Output() sectionChange = new EventEmitter<string>(); // Trimite secțiunea activă înapoi
 
   showContent(sectionId: string): void {
-    console.log('Apăsat:', sectionId); // Debugging pentru a vedea ce secțiune este apăsată
-
     this.activeSection = sectionId;
     this.cdRef.detectChanges();
+    // console.log('Apăsat:', sectionId);
+    this.sectionChange.emit(sectionId); // Emitere eveniment către AppComponent
+  }
+
+  ngOnDestroy() {
+    // Curăță evenimentul pentru a evita scurgeri de memorie
+    document.removeEventListener('slider', this.showSlider.bind(this));
+  }
+
+  showSlider() {
+    this.activeSection = 'slider';
   }
 }

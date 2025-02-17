@@ -12,7 +12,13 @@ body {
 }
 .logo img {
     height: 60px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
 }
+.logo img:hover {
+    transform: scale(1.1); /* Mărește ușor logo-ul la hover */
+}
+
 .contact-info {
     text-align: right;
 }
