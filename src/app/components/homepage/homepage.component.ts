@@ -7,10 +7,11 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
-  imports: [CommonModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css',
 })
