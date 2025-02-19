@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://star-d-backend.onrender.com',
+  apiUrl: 'http://localhost:8080',
   firebaseConfig: {
     apiKey: 'AIzaSyC4JfSM0oOpdd3SuZ9U-ZjdbAkm5JJNBd4',
     authDomain: 'star-d-b36f2.firebaseapp.com',

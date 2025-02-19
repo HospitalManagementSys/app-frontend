@@ -5,7 +5,8 @@ import { Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
-// import { AuthService } from '../../services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     RouterModule,
     MatButtonModule,
+    HttpClientModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -27,49 +29,39 @@ export class LoginComponent {
   users: any = [];
   isServer = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     //this.googleService.getFirebaseUserData();
   }
 
-  /*onLogin(): void {
+  onLogin(): void {
     this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
         this.authService.saveToken(response.token);
         const role = this.authService.getRole();
 
-        if (response.isAdmin) {
-          this.router.navigate(['/admin']);
-        } else if (response.role === 'professor') {
-          this.router.navigate(['/professor/appointments']);
-        } else if (response.role === 'student') {
-          this.router.navigate(['/student/exams']);
+        if (response.role === 'Doctor') {
+          this.router.navigate(['/doctor/appointments']);
+        } else if (response.role === 'Patient') {
+          this.router.navigate(['/patient/requests']);
         } else {
           this.errorMessage = 'Rol necunoscut';
         }
       },
-      error: (err) => {
-        //   this.snackBarService.show('Eroare login!', 'error');
+      error: () => {
         this.errorMessage = 'Email sau parola invalida!';
       },
     });
   }
 
-  onLogout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
-
   onContinue(): void {
     const role = this.authService.getRole();
 
-    if (role === 'professor') {
-      this.router.navigate(['/professor/appointments']);
-    } else if (role === 'student') {
-      this.router.navigate(['/student/exams']);
-    } else if (role === 'admin') {
-      this.router.navigate(['/admin']);
+    if (role === 'Doctor') {
+      this.router.navigate(['/doctor/appointments']);
+    } else if (role === 'Patient') {
+      this.router.navigate(['/patient/requests']);
     } else {
       this.errorMessage = 'Rol necunoscut';
     }
@@ -77,5 +69,10 @@ export class LoginComponent {
 
   isAuthenticated() {
     return this.authService.isAuthenticated();
-  }*/
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }
