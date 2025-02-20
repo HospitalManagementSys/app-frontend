@@ -23,9 +23,9 @@ export class AuthService {
   }
 
   saveToken(token: string): void {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('auth_token', token);
-    }
+    //  if (isPlatformBrowser(this.platformId)) {
+    localStorage.setItem('auth_token', token);
+    //  }
     this.setAuthState(token);
   }
 
@@ -54,7 +54,9 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return this.token;
+    const token = localStorage.getItem('auth_token');
+    console.log('🔹 Token from storage:', token);
+    return token;
   }
 
   getRole(): string | null {
@@ -66,10 +68,8 @@ export class AuthService {
   }
 
   logout(): void {
+    localStorage.removeItem('auth_token');
     this.token = null;
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('auth_token');
-    }
   }
   private isTokenExpired(token: string): boolean {
     const decodedToken = this.decodeToken(token);

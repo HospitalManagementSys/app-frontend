@@ -1,7 +1,4 @@
-/* body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-} */
+
 .header {
     display: flex;
     align-items: center;
@@ -25,25 +22,25 @@
 }
 .nav {
     display: flex;
-    align-items: center;
+    justify-content:baseline;
 }
 .btn {
-    background-color: red;
+    background-color: #dc2626; /* Albastru pentru login */
     color: white;
-    padding: 10px 15px;
-    text-decoration: none;
+    font-size: 16px;
     font-weight: bold;
-    border-radius: 5px;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
+    padding: 10px 20px;
     border: none;
     margin: 5px;
-    height: 50px;
-    width: 150px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: background-color 0.3s ease-in-out;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 3.8);
 }
 .btn:hover {
-    background-color: darkred;
+    background-color: white;
+    color: #444;
 }
 .card {
     max-width: 800px;

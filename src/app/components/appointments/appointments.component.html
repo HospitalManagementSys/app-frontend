@@ -1,1 +1,26 @@
-<p>appointments works!</p>
+<div class="grid-container">
+    <div *ngFor="let appointment of filteredAppointments" class="card">
+      <!-- Header cu ID-ul pacientului -->
+      <div class="card-header">
+        <h6>ID Pacient: {{ appointment.patientId }}</h6>
+      </div>
+  
+      <!-- Conținut: Status + Data -->
+      <div class="card-content">
+        <p><strong>Status:</strong> 
+          <span class="status" [ngClass]="{
+            'scheduled': appointment.status.toLowerCase() === 'confirmed',
+            'pending': appointment.status.toLowerCase() === 'pending',
+            'rejected': appointment.status.toLowerCase() === 'rejected'
+          }">
+            {{ appointment.status }}
+          </span>
+        </p>
+        <p><strong>Data:</strong> {{ appointment.startTime | date: 'dd.MM.yyyy' }}</p>
+      </div>
+  
+      <!-- Tooltip pentru detalii -->
+      <div class="tooltip">Click pentru mai multe detalii</div>
+    </div>
+  </div>
+  

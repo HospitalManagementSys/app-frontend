@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../environments/environment';
 import { User, UserResponse } from '../models/user.model';
 
@@ -17,7 +17,7 @@ export class UserService {
     let headers = new HttpHeaders();
 
     if (token) {
-      headers = headers.set('Authorization', 'Bearer ${token)');
+      headers = headers.set('Authorization', token);
     }
 
     return headers;
@@ -36,11 +36,21 @@ export class UserService {
     return this.http.get<User>(url, { headers: this.getAuthHeaders() });
   }
 
-  // Get user data
   getUserData(): Observable<UserResponse> {
     const token = localStorage.getItem('auth_token');
-    console.log('Token trimis:', token);
+    console.log('🔹 Token trimis:', token);
+
     const url = `${this.apiUrl}/data`;
-    return this.http.get<UserResponse>(url, { headers: this.getAuthHeaders() });
+    return this.http
+      .get<UserResponse>(url, { headers: this.getAuthHeaders() })
+      .pipe(
+        tap((response) => {
+          console.log('✅ Răspuns primit de la backend:', response);
+        }),
+        catchError((error) => {
+          console.error('❌ Eroare la apelul getUserData():', error);
+          return throwError(() => error);
+        })
+      );
   }
 }

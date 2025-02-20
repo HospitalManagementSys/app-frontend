@@ -38,21 +38,18 @@ export class HeaderComponent {
         this.userInfo = undefined;
       }
 
-      const token = this.authService.getToken(); // ✅ Preia token-ul înainte
+      const token = this.authService.getToken();
 
       if (token && !this.gettingUserData) {
         this.loadUserData();
       } else {
-        // console.warn(
-        //   'Token invalid sau utilizator neautentificat, loadUserData() nu va fi apelată.'
-        // );
       }
     });
   }
 
   ngOnDestroy(): void {
     if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe(); // ✅ Oprește subscribe-ul când componenta este distrusă
+      this.routerSubscription.unsubscribe();
     }
   }
 
@@ -74,15 +71,32 @@ export class HeaderComponent {
         //   'Eroare la preluarea datelor utilizatorului!',
         //   'error'
         // );
+
         this.gettingUserData = false;
       },
     });
   }
 
   onLogoClick() {
-    this.logoClicked.emit('slider'); // Emitere eveniment către homepage
+    this.logoClicked.emit('slider');
   }
   login(): void {
     this.router.navigate(['/login']);
+  }
+
+  toggleAuth() {
+    if (this.isAuthenticated()) {
+      this.onLogout(); // Dacă este autentificat, face logout
+    } else {
+      this.router.navigate(['/login']); // Dacă nu este autentificat, duce la pagina de login
+    }
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+  isAuthenticated() {
+    return this.authService.isAuthenticated();
   }
 }
