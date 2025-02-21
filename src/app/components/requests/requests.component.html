@@ -1,1 +1,12 @@
-<p>requests works!</p>
+<h1>Alegeti departamentul pentru programare:</h1>
+<div class="grid-container">
+    <div *ngFor="let department of departments" class="card">
+      <div class="card-header">
+        <h6>{{ department.name }}</h6>
+      </div>
+  
+      <!-- Tooltip pentru detalii -->
+      <div class="tooltip">Click pentru programare</div>
+    </div>
+  </div>
+  
