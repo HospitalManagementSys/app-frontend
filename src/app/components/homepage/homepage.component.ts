@@ -63,18 +63,16 @@ export class HomepageComponent implements OnInit {
   }
   constructor(private cdRef: ChangeDetectorRef) {}
 
-  @Input() activeSection: string = 'slider'; // Primește secțiunea activă de la AppComponent
-  @Output() sectionChange = new EventEmitter<string>(); // Trimite secțiunea activă înapoi
+  @Input() activeSection: string = 'slider';
+  @Output() sectionChange = new EventEmitter<string>();
 
   showContent(sectionId: string): void {
     this.activeSection = sectionId;
     this.cdRef.detectChanges();
-    // console.log('Apăsat:', sectionId);
-    this.sectionChange.emit(sectionId); // Emitere eveniment către AppComponent
+    this.sectionChange.emit(sectionId);
   }
 
   ngOnDestroy() {
-    // Curăță evenimentul pentru a evita scurgeri de memorie
     document.removeEventListener('slider', this.showSlider.bind(this));
   }
 

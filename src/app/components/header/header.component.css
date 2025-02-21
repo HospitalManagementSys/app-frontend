@@ -1,5 +1,6 @@
 
 .header {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -96,7 +97,7 @@
 
 .toggle-auth {
     display: block;
-    background-color: #dc2626; /* Albastru pentru login */
+    background-color: #dc2626; 
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -114,3 +115,45 @@
     background-color: white;
     color: #444;
 }
+.heart {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 50px;
+    height: 50px;
+    background-color: #dc2626;
+    animation: pulse 1.5s infinite;
+}
+
+.heart::before,
+.heart::after {
+    position: absolute;
+    justify-content: center;
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #dc2626;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -25px;
+    left: 0;
+}
+
+.heart::after {
+    left: 25px;
+    top: 0;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1) translate(-50%, -50%) rotate(-45deg); }
+    50% { transform: scale(1.2) translate(-50%, -50%) rotate(-45deg); }
+    100% { transform: scale(1) translate(-50%, -50%) rotate(-45deg); }
+}
+

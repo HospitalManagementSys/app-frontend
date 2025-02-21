@@ -86,9 +86,9 @@ export class HeaderComponent {
 
   toggleAuth() {
     if (this.isAuthenticated()) {
-      this.onLogout(); // Dacă este autentificat, face logout
+      this.onLogout();
     } else {
-      this.router.navigate(['/login']); // Dacă nu este autentificat, duce la pagina de login
+      this.router.navigate(['/login']);
     }
   }
 

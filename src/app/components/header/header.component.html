@@ -1,36 +1,16 @@
-<!-- 
-
-    <header class="header">
-        <div class="logo">
-            <img src="https://i.imgur.com/OzTdfKf.png" alt="Spital Logo"  (click)="onLogoClick()">
-        </div>
-        <div class="contact-info">
-            <div class="text-container">
-                <p><strong>Telefon:</strong> +40 123 456 789</p>
-                <p><strong>Email:</strong> contact&#64;spital.ro</p>
-                <p><strong>Telefon Pacient:</strong> +40 987 654 321</p>
-            </div>
-            
-            <button class="btn" (click)="login()">Login</button>
-        </div>
-        
-       
-        
-    </header> -->
     <header class="header">
         <div class="logo">
             <img src="https://i.imgur.com/OzTdfKf.png" alt="Spital Logo" (click)="onLogoClick()">
         </div>
-        
+    <!-- <div class="heart"></div> -->
         <div class="contact-info">
+        
             <div class="text-container">
                 <p><strong>Telefon:</strong> +40 123 456 789</p>
                 <p><strong>Email:</strong> contact&#64;spital.ro</p>
                 <p><strong>Telefon Pacient:</strong> +40 987 654 321</p>
             </div>
-    
-            <!-- Butonul își schimbă automat textul și acțiunea în funcție de autentificare -->
-            <button class="button toggle-auth" (click)="toggleAuth()">
+                <button class="button toggle-auth" (click)="toggleAuth()">
                 {{ isAuthenticated() ? 'Logout' : 'Login' }}
               </button>
         </div>

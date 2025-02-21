@@ -23,7 +23,7 @@ export class RequestsComponent implements OnInit {
         // this.applyFilters();
       },
       error: (err) => {
-        console.log('Eroare la preluarea examenelor!', 'error');
+        console.log('Eroare la preluarea departamentelor!', 'error');
         // this.snackBarService.show('Eroare la preluarea examenelor!', 'error');
       },
     });
