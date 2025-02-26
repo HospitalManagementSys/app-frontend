@@ -1,6 +1,6 @@
 <h1>Alegeti departamentul pentru programare:</h1>
 <div class="grid-container">
-    <div *ngFor="let department of departments" class="card">
+    <div *ngFor="let department of departments" class="card"  (click)="redirectToDepartment(department.departmentId)">
       <div class="card-header">
         <h6>{{ department.name }}</h6>
       </div>

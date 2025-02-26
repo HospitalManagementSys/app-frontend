@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DepartmentService } from '../../services/department.service';
 import { Department } from '../../models/department.model';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-requests',
@@ -11,7 +12,10 @@ import { CommonModule } from '@angular/common';
 })
 export class RequestsComponent implements OnInit {
   departments: Department[] = [];
-  constructor(private departmentService: DepartmentService) {}
+  constructor(
+    private departmentService: DepartmentService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadDepartments();
@@ -27,5 +31,9 @@ export class RequestsComponent implements OnInit {
         // this.snackBarService.show('Eroare la preluarea examenelor!', 'error');
       },
     });
+  }
+
+  redirectToDepartment(departmentId: number): void {
+    this.router.navigate([`patient/requests/${departmentId}`]);
   }
 }

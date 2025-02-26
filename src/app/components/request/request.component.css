@@ -1,0 +1,163 @@
+.custom-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    justify-content: center; 
+    gap: 16px;
+}
+
+
+@media (min-width: 768px) {
+    .custom-container {
+        flex-direction: row; 
+    }
+}
+
+/* Stilizare pentru header-ul cardului */
+.custom-card-header {
+    background: linear-gradient(to right, #1e3a8a, #162447); 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); 
+    color: white; 
+    padding: 16px;
+    text-align: center;
+}
+
+/* Titlu card */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: red;
+}
+
+/* Subtitlu card */
+.card-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+
+/* Stil pentru containerul Date Picker */
+.custom-date-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+    margin: auto;
+}
+
+/* Stil pentru etichetă */
+.custom-date-picker label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Stil pentru inputul de tip data */
+.date-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Efect de focus pentru input */
+.date-input:focus {
+    border-color: #ff4b2b;
+    box-shadow: 0 0 5px rgba(255, 75, 43, 0.5);
+}
+
+/* Stil pentru mesajele de eroare */
+.error-message {
+    color: red;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+/* ---------------------------------------------------------------------------- */
+
+
+.doctors-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.doctor-card {
+    background: #f4f4f4;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0.5px 1px 5px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h2{
+    color: #dc2626;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    font-size:30px;
+}
+
+.doctor-card h3 {
+    margin: 5px 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+}
+
+.doctor-card p {
+    font-size: 14px;
+    color: #666;
+}
+
+
+
+button {
+    background-color: #dc2626;
+    color: white;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+    margin: 20px;
+    height: 40px;
+    width: 110px;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 3.8);
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+    
+}
+
+.no-doctors {
+    color: #dc2626;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+    font-size: 20px;
+}

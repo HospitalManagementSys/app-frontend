@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { Department } from '../models/department.model';
+import { Doctor } from '../models/doctor.model';
 
 @Injectable({
   providedIn: 'root',
@@ -52,4 +53,8 @@ export class DepartmentService {
   //     const url = `${this.apiUrl}/degree/${degreeId}`;
   //     return this.http.get<Exam[]>(url, { headers: this.getAuthHeaders() });
   //   }
+
+  getDoctorsByDepartment(departmentId: number): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(`${this.apiUrl}/${departmentId}/doctors`);
+  }
 }

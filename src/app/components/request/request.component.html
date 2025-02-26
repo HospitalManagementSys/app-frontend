@@ -1,1 +1,51 @@
-<p>request works!</p>
+<!-- <div class="custom-container">
+    <div class="custom-card-header">
+        <h3 class="card-title">{{ department?.name }}</h3>
+    </div>
+    
+
+
+
+    <div class="custom-date-picker">
+        <label for="dateInput">Selectează data:</label>
+        <input
+            type="date"
+            id="dateInput"
+            class="date-input"
+          
+            required
+        /> -->
+        <!-- <span class="error-message" *ngIf="dateFormControl.hasError('required')">
+            Data este <strong>obligatorie</strong>.
+        </span>
+        <span class="error-message" *ngIf="dateFormControl.hasError('invalidDate')">
+            Nu poți alege o dată din trecut.
+        </span> -->
+    <!-- </div>
+    
+</div> -->
+<!-- [(ngModel)]="selectedDate" 
+(change)="onDateChange($event)" -->
+
+<div class="doctors-container">
+    <h2>Doctorii din departamentul selectat</h2>
+  
+    <div *ngIf="doctors.length > 0; else noDoctors">
+        <div *ngFor="let doctor of doctors">
+            <div class="doctor-card">
+                <div class="doctor-info">
+              <h3>{{ doctor.user?.firstName }} {{ doctor.user?.lastName }}</h3>
+            </div>
+              <p><strong>Email:</strong> {{ doctor.user?.email }}</p>
+              <button (click)="selectDoctor(doctor.doctorId)">Selectează</button>
+            </div>
+          </div>
+          
+    </div>
+  
+    <!-- Afișează acest mesaj dacă nu există doctori -->
+    <ng-template #noDoctors>
+      <p class="no-doctors">Momentan nu există doctori în acest departament.</p>
+    </ng-template>
+  </div>
+  
