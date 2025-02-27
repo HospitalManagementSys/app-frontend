@@ -1,1 +1,106 @@
-<p>appointment works!</p>
+<div class="custom-container">
+
+    
+
+    <div class="custom-card">
+        <div class="custom-card-header">
+            <!-- <p class="card-subtitle">{{ exam?.user?.firstName }} {{ exam?.user?.lastName }}</p> -->
+             <p>Programare doctor</p>
+             
+        </div>
+        <button class="custom-back-button" (click)="goBack()">
+            <span class="arrow-icon">&#8592;</span> Back
+        </button>
+        <div class="custom-card-content">
+            <form #examForm="ngForm" (ngSubmit)="submit()">
+                <!-- Date Picker -->
+                <div class="form-group">
+                    <label for="dateInput">Data</label>
+                    <input type="date" id="dateInput" class="form-control"
+                    [formControl]="dateFormControl"
+                        [min]="minDate" [max]="maxDate"
+                        [(ngModel)]="selectedDate" name="selectedDate" (ngModelChange)="onDateChange($event)" required  >
+               <span class="error-message"
+               *ngIf="dateFormControl.invalid && (dateFormControl.dirty || dateFormControl.touched)">
+               <span *ngIf="dateFormControl.hasError('required')">
+                   Data este <strong>obligatorie</strong>.
+               </span>
+               <span *ngIf="dateFormControl.hasError('invalidDate')">
+                   Nu poți alege o dată din trecut.
+               </span>
+           </span>
+                
+                </div>
+    
+                <!-- Time Picker Start -->
+                 <div class="form-group">
+                    <label for="timeStart">Ora începere</label>
+                    <input type="time" id="timeStart" class="form-control"
+                    [formControl]="timeStartFormControl"
+                        [(ngModel)]="selectedTimeStart" name="selectedTimeStart" (ngModelChange)="onTimeStartChange($event)"
+                        [min]="minTime" [max]="maxTime" required>
+                   
+                    <span class="error-message"
+                    *ngIf="timeStartFormControl.invalid && (timeStartFormControl.dirty || timeStartFormControl.touched)">
+                    <span *ngIf="timeStartFormControl.hasError('required')"> Ora de începere este <strong>obligatorie</strong>. </span>
+                    <span *ngIf="timeStartFormControl.hasError('invalidTime')"> Ora trebuie să fie înaintea orei de încheiere. </span>
+                </span>
+                </div>
+    
+                <!-- Time Picker End -->
+                <div class="form-group">
+                    <label for="timeEnd">Ora încheiere</label>
+                    <input type="time" id="timeEnd" class="form-control"
+                    [formControl]="timeEndFormControl"
+
+                        [(ngModel)]="selectedTimeEnd" name="selectedTimeEnd" (ngModelChange)="onTimeEndChange($event)"
+                        [min]="minTime" [max]="maxTime" required>
+                        <span class="error-message"
+                        *ngIf="timeEndFormControl.invalid && (timeEndFormControl.dirty || timeEndFormControl.touched)">
+                    <span class="error-message" *ngIf="timeEndFormControl.hasError('required')"> Ora de încheiere este <strong>obligatorie</strong>. </span>
+                    <span class="error-message" *ngIf="timeEndFormControl.hasError('invalidTime')"> Ora trebuie să fie după ora de începere. </span>
+                    <!-- <span class="error-message" *ngIf="timeEndFormControl.hasError('timeOverlap')"> Intervalul se suprapune cu o programare existentă. </span> -->
+                </span>
+                </div>
+
+                
+            <!-- Office Dropdown -->
+            <div class="form-group">
+                <label for="officeSelect">Alege un birou</label>
+                <select id="officeSelect" class="form-control" [formControl]="officeFormControl" [(ngModel)]="selectedOfficeId"
+                    (change)="onOfficeChange($event)" required>
+                    <option *ngFor="let office of offices" [value]="office.officeId">
+                        {{ office.name }}
+                    </option>
+                </select>
+
+                <span class="error-message"
+                *ngIf="timeEndFormControl.invalid && (timeEndFormControl.dirty || timeEndFormControl.touched)">
+                <span class="error-message" *ngIf="officeFormControl.hasError('required')">
+                    Alegerea unui birou este <strong>obligatorie</strong>.
+                </span>
+                </span>
+            </div>
+
+                <button type="submit" class="custom-button" [disabled]="formDisabled">Programează</button>
+
+            </form>
+
+        </div>
+    </div>
+    
+</div>
+
+    
+ 
+
+
+    <!-- <div class="custom-date-picker">
+        <label for="dateInput">Selectează data:</label>
+        <input
+            type="date"
+            id="dateInput"
+            class="date-input"
+          
+            required
+        />  -->

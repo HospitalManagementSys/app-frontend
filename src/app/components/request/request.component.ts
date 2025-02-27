@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { DepartmentService } from '../../services/department.service';
 import { Department } from '../../models/department.model';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
@@ -14,13 +14,13 @@ import { Doctor } from '../../models/doctor.model';
 export class RequestComponent implements OnInit {
   id: number | null = null;
   department: Department | null = null;
-  selectedDate: string | null = null;
   departmentId!: number;
   doctors: Doctor[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private requestService: DepartmentService
+    private requestService: DepartmentService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +61,6 @@ export class RequestComponent implements OnInit {
   }
 
   selectDoctor(doctorId: number): void {
-    console.log('Doctor selectat cu ID:', doctorId);
-    // Aici poți adăuga navigare spre o altă pagină sau alte acțiuni
+    this.router.navigate([`patient/requests/:departmentId/doctor/${doctorId}`]);
   }
 }
