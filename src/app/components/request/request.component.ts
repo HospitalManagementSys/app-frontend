@@ -61,6 +61,9 @@ export class RequestComponent implements OnInit {
   }
 
   selectDoctor(doctorId: number): void {
-    this.router.navigate([`patient/requests/:departmentId/doctor/${doctorId}`]);
+    //  this.router.navigate([`patient/requests/:departmentId/doctor/${doctorId}`]);
+    this.router.navigate([
+      `/patient/requests/${this.departmentId}/doctor/${doctorId}`,
+    ]);
   }
 }

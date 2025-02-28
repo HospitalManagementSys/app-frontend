@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../environments/environment';
 import { User, UserResponse } from '../models/user.model';
+import { Patient } from '../models/patient.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private apiUrl = `${environment.apiUrl}/users`;
+  private patientApiUrl = `${environment.apiUrl}/patient/patients`;
 
   constructor(private http: HttpClient) {}
 
@@ -49,6 +51,19 @@ export class UserService {
         }),
         catchError((error) => {
           console.error('❌ Eroare la apelul getUserData():', error);
+          return throwError(() => error);
+        })
+      );
+  }
+  getPatientByUserId(userId: number): Observable<Patient> {
+    return this.http
+      .get<Patient>(`${this.patientApiUrl}/${userId}`, {
+        headers: this.getAuthHeaders(),
+      })
+      .pipe(
+        tap((patient) => console.log('✅ Pacient găsit:', patient)),
+        catchError((error) => {
+          console.error('❌ Eroare la preluarea pacientului:', error);
           return throwError(() => error);
         })
       );

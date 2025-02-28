@@ -1,16 +1,15 @@
 <div class="custom-container">
 
-    
+    <button class="custom-back-button" (click)="goBack()">
+        <span class="arrow-icon">&#8592;</span> Back
+    </button>
 
     <div class="custom-card">
         <div class="custom-card-header">
-            <!-- <p class="card-subtitle">{{ exam?.user?.firstName }} {{ exam?.user?.lastName }}</p> -->
              <p>Programare doctor</p>
              
         </div>
-        <button class="custom-back-button" (click)="goBack()">
-            <span class="arrow-icon">&#8592;</span> Back
-        </button>
+ 
         <div class="custom-card-content">
             <form #examForm="ngForm" (ngSubmit)="submit()">
                 <!-- Date Picker -->
@@ -88,19 +87,89 @@
 
         </div>
     </div>
+
+    <div class="custom-card1">
+        <div class="custom-card-header">
+            <p>Intervale ocupate</p>
+        </div>
+    
+        <div class="appointment-container">
+            <!-- Lista programărilor utilizatorului -->
+            <div *ngIf="getAppointments().length > 0 && id !== null; else noAppointments" class="appointments-list">
+                <ul class="appointments">
+                    <li *ngFor="let appointment of getAppointments()" class="appointment-item">
+                        <div class="appointment-details">
+                            <span class="status" [ngClass]="{
+                                'scheduled': appointment.status.toLowerCase() === 'scheduled',
+                                'pending': appointment.status.toLowerCase() === 'pending',
+                                'rejected': appointment.status.toLowerCase() === 'rejected'
+                            }">
+                                {{ getStatusTranslation(appointment.status)}}
+                            </span>
+                            <span class="time">
+                                {{ appointment.startTime }} - {{ appointment.endTime }}
+                            </span>
+                        </div>
+    
+                       
+                    </li>
+                </ul>
+            </div>
+    
+            <!-- Mesaj dacă nu există programări -->
+            <ng-template #noAppointments>
+                <div class="no-appointments-message">Nu există programări.</div>
+            </ng-template>
+        </div>
+    </div>
+    <div class="custom-card">
+        <div class="custom-card-header">
+            <h3>Programările mele</h3>
+        </div>
+    
+        <div class="custom-card-content1">
+            <!-- My Appointments List -->
+            <div *ngIf="getAppointmentsForPatient().length > 0 && id !== null; else noMyAppointments">
+                <ul class="appointments-list">
+                    <li *ngFor="let appointment of getAppointmentsForPatient()" class="appointment-item">
+                        <div class="appointment-details">
+                            <span 
+                                class="status" 
+                                [ngClass]="{
+                                    'status-scheduled': appointment.status.toLowerCase() === 'scheduled',
+                                    'status-pending': appointment.status.toLowerCase() === 'pending',
+                                    'status-rejected': appointment.status.toLowerCase() === 'rejected'
+                                }"
+                            >
+                                {{ getStatusTranslation(appointment.status).toUpperCase() }}
+                            </span>
+                            <span class="appointment-time">
+                                {{ appointment.startTime }} - {{ appointment.endTime  }}
+                            </span>
+                            
+                        </div>
+
+    
+                        <!-- Cancel Button for Pending Appointments -->
+                        <!-- <button 
+                            *ngIf="appointment.status.toLowerCase() === 'pending'"
+                            class="cancel-button"
+                            (click)="cancelAppointment(appointment.appointmentId)"
+                        >
+                            Anulează
+                        </button> -->
+                    </li>
+                </ul>
+            </div>
+    
+            <!-- No My Appointments Message -->
+            <ng-template #noMyAppointments>
+                <div class="no-appointments-message">Nu există programări</div>
+            </ng-template>
+        </div>
+    </div>
+    
     
 </div>
 
     
- 
-
-
-    <!-- <div class="custom-date-picker">
-        <label for="dateInput">Selectează data:</label>
-        <input
-            type="date"
-            id="dateInput"
-            class="date-input"
-          
-            required
-        />  -->

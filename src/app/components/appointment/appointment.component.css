@@ -15,16 +15,17 @@
 }
 
 .custom-back-button {
+    align-items: center;
+    justify-content: center;
     background-color:transparent;
     color: gray; 
     font-size: 16px;
     font-weight: bold;
     border: none;
-    display: flex;
-    align-items: center;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
     border-radius: 8px;
+    box-shadow: 0 0 4px rgba(74, 74, 74, 0.8); 
 }
 
 .custom-back-button:hover {
@@ -88,6 +89,16 @@
 
 /* Card container */
 .custom-card {
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: auto;
+}
+.custom-card1 {
     align-items: center;
     justify-content: center;
     width: 300px;
