@@ -1,10 +1,8 @@
 /* Container pentru layout */
 .custom-container {
     display: flex;
-    flex-direction: column; 
     align-items: flex-start;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     gap: 20px; 
 }
 
@@ -14,9 +12,33 @@
     }
 }
 
+/* Cards */
+.custom-card,
+.custom-card1,
+.custom-card2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Face ca elementele din interior să se distribuie */
+    min-height: 200px; /* Ajustează după necesități */
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Header card */
+.custom-card-header {
+    background: linear-gradient(to right, rgb(245, 71, 71), rgb(163, 26, 26));
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Back button */
 .custom-back-button {
-    align-items: center;
-    justify-content: center;
     background-color:transparent;
     color: gray; 
     font-size: 16px;
@@ -33,48 +55,11 @@
     background-color: white;
 }
 
-.custom-back-button:focus {
-    outline: none;
-    box-shadow: 0 0 4px rgba(74, 74, 74, 0.8); 
-}
-
 .arrow-icon {
     margin-right: 8px; 
     font-size: 20px;
 }
 
-
-.custom-date-picker {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 300px;
-    margin: auto;
-}
-
-/* Stil pentru etichetă */
-.custom-date-picker label {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Stil pentru inputul de tip data */
-.date-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    transition: border-color 0.3s ease-in-out;
-}
-
-/* Efect de focus pentru input */
-.date-input:focus {
-    border-color: #ff4b2b;
-    box-shadow: 0 0 5px rgba(255, 75, 43, 0.5);
-}
 
 /* Stil pentru mesajele de eroare */
 .error-message {
@@ -85,50 +70,47 @@
 }
 
 
+.appointments-list {
+    list-style: none;
+    padding: 0;
+}
 
+.appointment-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
 
-/* Card container */
-.custom-card {
+.appointment-details {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    width: 300px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: auto;
-}
-.custom-card1 {
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: auto;
+    justify-content: space-between;
+    margin-bottom: 5px;
 }
 
-/* Header card */
-.custom-card-header {
-    background: linear-gradient(to right, rgb(245, 71, 71), rgb(163, 26, 26));
-    border-radius: 10px;
-    color: white;
-    padding: 15px;
-    text-align: center;
+
+.status-scheduled {
+    color: green !important;
 }
 
-/* Titlu */
-.card-title {
-    font-size: 20px;
+.status-pending {
+    color: orange;
+}
+
+.status-rejected {
+    color: red;
+}
+
+.no-appointments-message{
+    display:flex;
+    justify-content:center;
+    margin-bottom: 30px;
+}
+
+.status {
     font-weight: bold;
 }
 
-/* Subtitlu */
-.card-subtitle {
-    font-size: 16px;
-    opacity: 0.9;
-}
+
 
 /* Form */
 .form-group {
@@ -168,7 +150,7 @@
     margin-top: 5px;
 }
 
-/* Buton */
+/* Buton programeaza */
 .custom-button {
     background-color: #dc2626; 
     color: white;
@@ -195,3 +177,19 @@
     cursor: not-allowed;
 }
 
+.cancel-button{
+    background-color:#ccc; 
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;    width: 100%;
+    margin-top: 10px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 3.8);
+}
+.cancel-button:hover{
+    background: white;
+}

@@ -23,9 +23,7 @@ export class AuthService {
   }
 
   saveToken(token: string): void {
-    //  if (isPlatformBrowser(this.platformId)) {
     localStorage.setItem('auth_token', token);
-    //  }
     this.setAuthState(token);
   }
 
@@ -55,7 +53,6 @@ export class AuthService {
 
   getToken(): string | null {
     const token = localStorage.getItem('auth_token');
-    console.log('🔹 Token from storage:', token);
     return token;
   }
 

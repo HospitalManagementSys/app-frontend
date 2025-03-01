@@ -39,11 +39,9 @@ export class RequestComponent implements OnInit {
     this.requestService.getDepartmentById(this.id).subscribe({
       next: (data: Department) => {
         this.department = data;
-        // this.trySetDates();
       },
       error: (err) => {
         console.error('Eroare la preluarea departamentului:', err);
-        // this.snackBarService.show('Eroare la preluarea examenului!', 'error');
       },
     });
   }
@@ -61,7 +59,6 @@ export class RequestComponent implements OnInit {
   }
 
   selectDoctor(doctorId: number): void {
-    //  this.router.navigate([`patient/requests/:departmentId/doctor/${doctorId}`]);
     this.router.navigate([
       `/patient/requests/${this.departmentId}/doctor/${doctorId}`,
     ]);

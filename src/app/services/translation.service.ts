@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class StatusTranslationService {
-  // 🔹 Dicționar pentru traducerea statusurilor
   private statusTranslation: { [key: string]: string } = {
     scheduled: 'Programat',
     pending: 'În așteptare',

@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserResponse } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
+import { SnackBarService } from '../../services/snack-bar.service';
 
 type UserRole = 'doctor' | 'patient';
 
@@ -27,7 +28,8 @@ export class HeaderComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {
@@ -66,11 +68,10 @@ export class HeaderComponent {
         this.gettingUserData = false;
       },
       error: (err) => {
-        console.error('Eroare la preluarea datelor utilizatorului:', err);
-        // this.snackBarService.show(
-        //   'Eroare la preluarea datelor utilizatorului!',
-        //   'error'
-        // );
+        this.snackBarService.show(
+          'Eroare la preluarea datelor utilizatorului!',
+          'error'
+        );
 
         this.gettingUserData = false;
       },

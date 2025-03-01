@@ -1,0 +1,88 @@
+/* Stilizare titlu */
+.dialog-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Container pentru detalii */
+.dialog-content {
+    background-color: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
+
+/* Grid pentru detalii */
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Element individual de detaliu */
+.detail-item {
+    border-left: 4px solid #ddd;
+    padding-left: 10px;
+}
+
+.detail-item strong {
+    display: block;
+    font-size: 14px;
+    color: #555;
+}
+
+.detail-item span {
+    display: block;
+    font-size: 16px;
+    color: #222;
+    font-weight: bold;
+}
+
+/* Butoane */
+.dialog-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.accept-btn,
+.reject-btn {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+}
+
+.accept-btn {
+    background-color: #28a745;
+}
+
+.accept-btn:hover {
+    background-color: #218838;
+}
+
+.reject-btn {
+    background-color: #dc3545;
+}
+
+.reject-btn:hover {
+    background-color: #c82333;
+}
+
+/* Stil pentru buton dezactivat */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

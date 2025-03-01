@@ -5,7 +5,6 @@ export class Office {
   name: string;
   departmentId: number;
 
-  // Relație opțională cu Departamentul
   department?: Department;
 
   constructor(

@@ -4,7 +4,7 @@ export class Doctor {
   doctorId: number;
   userId: number;
   departmentId: number;
-  user?: User; // Adăugăm opțional obiectul User
+  user?: User;
 
   constructor(
     doctorId: number,
@@ -15,6 +15,6 @@ export class Doctor {
     this.doctorId = doctorId;
     this.userId = userId;
     this.departmentId = departmentId;
-    if (user) this.user = user; // Dacă user este definit, îl setăm
+    if (user) this.user = user;
   }
 }

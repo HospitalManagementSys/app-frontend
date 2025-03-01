@@ -3,6 +3,7 @@ import { DepartmentService } from '../../services/department.service';
 import { Department } from '../../models/department.model';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { SnackBarService } from '../../services/snack-bar.service';
 
 @Component({
   selector: 'app-requests',
@@ -14,7 +15,8 @@ export class RequestsComponent implements OnInit {
   departments: Department[] = [];
   constructor(
     private departmentService: DepartmentService,
-    private router: Router
+    private router: Router,
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {
@@ -24,11 +26,12 @@ export class RequestsComponent implements OnInit {
     this.departmentService.getPertinentDepartments().subscribe({
       next: (data: Department[]) => {
         this.departments = data;
-        // this.applyFilters();
       },
       error: (err) => {
-        console.log('Eroare la preluarea departamentelor!', 'error');
-        // this.snackBarService.show('Eroare la preluarea examenelor!', 'error');
+        this.snackBarService.show(
+          'Eroare la preluarea departamentelor!',
+          'error'
+        );
       },
     });
   }

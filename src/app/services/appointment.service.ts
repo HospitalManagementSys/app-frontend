@@ -54,9 +54,9 @@ export class AppointmentsService {
     });
   }
 
+  // Get appointments for a doctor
   getAppointmentsForDoctor(doctorId: number): Observable<Appointment[]> {
     const token = localStorage.getItem('auth_token');
-    console.log('Token trimis:', token);
     const url = `${this.apiUrl}/doctor/${doctorId}`;
     return this.http.get<Appointment[]>(url, {
       headers: this.getAuthHeaders(),

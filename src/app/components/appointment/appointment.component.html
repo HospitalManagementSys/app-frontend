@@ -5,81 +5,83 @@
     </button>
 
     <div class="custom-card">
+
         <div class="custom-card-header">
-             <p>Programare doctor</p>
-             
+            <p>Programare doctor</p>
+
         </div>
- 
+
+
         <div class="custom-card-content">
-            <form #examForm="ngForm" (ngSubmit)="submit()">
+            <form #examForm="ngForm" (ngSubmit)="submitAppointment()">
                 <!-- Date Picker -->
                 <div class="form-group">
                     <label for="dateInput">Data</label>
-                    <input type="date" id="dateInput" class="form-control"
-                    [formControl]="dateFormControl"
-                        [min]="minDate" [max]="maxDate"
-                        [(ngModel)]="selectedDate" name="selectedDate" (ngModelChange)="onDateChange($event)" required  >
-               <span class="error-message"
-               *ngIf="dateFormControl.invalid && (dateFormControl.dirty || dateFormControl.touched)">
-               <span *ngIf="dateFormControl.hasError('required')">
-                   Data este <strong>obligatorie</strong>.
-               </span>
-               <span *ngIf="dateFormControl.hasError('invalidDate')">
-                   Nu poți alege o dată din trecut.
-               </span>
-           </span>
-                
-                </div>
-    
-                <!-- Time Picker Start -->
-                 <div class="form-group">
-                    <label for="timeStart">Ora începere</label>
-                    <input type="time" id="timeStart" class="form-control"
-                    [formControl]="timeStartFormControl"
-                        [(ngModel)]="selectedTimeStart" name="selectedTimeStart" (ngModelChange)="onTimeStartChange($event)"
-                        [min]="minTime" [max]="maxTime" required>
-                   
+                    <input type="date" id="dateInput" class="form-control" [formControl]="dateFormControl"
+                        [min]="minDate" [max]="maxDate" [(ngModel)]="selectedDate" name="selectedDate"
+                        (ngModelChange)="onDateChange($event)" required>
                     <span class="error-message"
-                    *ngIf="timeStartFormControl.invalid && (timeStartFormControl.dirty || timeStartFormControl.touched)">
-                    <span *ngIf="timeStartFormControl.hasError('required')"> Ora de începere este <strong>obligatorie</strong>. </span>
-                    <span *ngIf="timeStartFormControl.hasError('invalidTime')"> Ora trebuie să fie înaintea orei de încheiere. </span>
-                </span>
+                        *ngIf="dateFormControl.invalid && (dateFormControl.dirty || dateFormControl.touched)">
+                        <span *ngIf="dateFormControl.hasError('required')">
+                            Data este <strong>obligatorie</strong>.
+                        </span>
+                        <span *ngIf="dateFormControl.hasError('invalidDate')">
+                            Nu poți alege o dată din trecut.
+                        </span>
+                    </span>
+
                 </div>
-    
+
+                <!-- Time Picker Start -->
+                <div class="form-group">
+                    <label for="timeStart">Ora începere</label>
+                    <input type="time" id="timeStart" class="form-control" [formControl]="timeStartFormControl"
+                        [(ngModel)]="selectedTimeStart" name="selectedTimeStart"
+                        (ngModelChange)="onTimeStartChange($event)" [min]="minTime" [max]="maxTime" required>
+
+                    <span class="error-message"
+                        *ngIf="timeStartFormControl.invalid && (timeStartFormControl.dirty || timeStartFormControl.touched)">
+                        <span *ngIf="timeStartFormControl.hasError('required')"> Ora de începere este
+                            <strong>obligatorie</strong>. </span>
+                        <span *ngIf="timeStartFormControl.hasError('invalidTime')"> Ora trebuie să fie înaintea orei de
+                            încheiere. </span>
+                    </span>
+                </div>
+
                 <!-- Time Picker End -->
                 <div class="form-group">
                     <label for="timeEnd">Ora încheiere</label>
-                    <input type="time" id="timeEnd" class="form-control"
-                    [formControl]="timeEndFormControl"
-
+                    <input type="time" id="timeEnd" class="form-control" [formControl]="timeEndFormControl"
                         [(ngModel)]="selectedTimeEnd" name="selectedTimeEnd" (ngModelChange)="onTimeEndChange($event)"
                         [min]="minTime" [max]="maxTime" required>
-                        <span class="error-message"
+                    <span class="error-message"
                         *ngIf="timeEndFormControl.invalid && (timeEndFormControl.dirty || timeEndFormControl.touched)">
-                    <span class="error-message" *ngIf="timeEndFormControl.hasError('required')"> Ora de încheiere este <strong>obligatorie</strong>. </span>
-                    <span class="error-message" *ngIf="timeEndFormControl.hasError('invalidTime')"> Ora trebuie să fie după ora de începere. </span>
-                    <!-- <span class="error-message" *ngIf="timeEndFormControl.hasError('timeOverlap')"> Intervalul se suprapune cu o programare existentă. </span> -->
-                </span>
+                        <span class="error-message" *ngIf="timeEndFormControl.hasError('required')"> Ora de încheiere
+                            este <strong>obligatorie</strong>. </span>
+                        <span class="error-message" *ngIf="timeEndFormControl.hasError('invalidTime')"> Ora trebuie să
+                            fie după ora de începere. </span>
+                        <!-- <span class="error-message" *ngIf="timeEndFormControl.hasError('timeOverlap')"> Intervalul se suprapune cu o programare existentă. </span> -->
+                    </span>
                 </div>
 
-                
-            <!-- Office Dropdown -->
-            <div class="form-group">
-                <label for="officeSelect">Alege un birou</label>
-                <select id="officeSelect" class="form-control" [formControl]="officeFormControl" [(ngModel)]="selectedOfficeId"
-                    (change)="onOfficeChange($event)" required>
-                    <option *ngFor="let office of offices" [value]="office.officeId">
-                        {{ office.name }}
-                    </option>
-                </select>
 
-                <span class="error-message"
-                *ngIf="timeEndFormControl.invalid && (timeEndFormControl.dirty || timeEndFormControl.touched)">
-                <span class="error-message" *ngIf="officeFormControl.hasError('required')">
-                    Alegerea unui birou este <strong>obligatorie</strong>.
-                </span>
-                </span>
-            </div>
+                <!-- Office Dropdown -->
+                <div class="form-group">
+                    <label for="officeSelect">Alege un birou</label>
+                    <select id="officeSelect" class="form-control" [formControl]="officeFormControl"
+                        [(ngModel)]="selectedOfficeId" (change)="onOfficeChange($event)" required>
+                        <option *ngFor="let office of offices" [value]="office.officeId">
+                            {{ office.name }}
+                        </option>
+                    </select>
+
+                    <span class="error-message"
+                        *ngIf="timeEndFormControl.invalid && (timeEndFormControl.dirty || timeEndFormControl.touched)">
+                        <span class="error-message" *ngIf="officeFormControl.hasError('required')">
+                            Alegerea unui birou este <strong>obligatorie</strong>.
+                        </span>
+                    </span>
+                </div>
 
                 <button type="submit" class="custom-button" [disabled]="formDisabled">Programează</button>
 
@@ -92,84 +94,76 @@
         <div class="custom-card-header">
             <p>Intervale ocupate</p>
         </div>
-    
+
         <div class="appointment-container">
             <!-- Lista programărilor utilizatorului -->
             <div *ngIf="getAppointments().length > 0 && id !== null; else noAppointments" class="appointments-list">
                 <ul class="appointments">
                     <li *ngFor="let appointment of getAppointments()" class="appointment-item">
                         <div class="appointment-details">
-                            <span class="status" [ngClass]="{
-                                'scheduled': appointment.status.toLowerCase() === 'scheduled',
-                                'pending': appointment.status.toLowerCase() === 'pending',
-                                'rejected': appointment.status.toLowerCase() === 'rejected'
-                            }">
-                                {{ getStatusTranslation(appointment.status)}}
-                            </span>
                             <span class="time">
                                 {{ appointment.startTime }} - {{ appointment.endTime }}
                             </span>
                         </div>
-    
-                       
+
+
                     </li>
                 </ul>
             </div>
-    
+
             <!-- Mesaj dacă nu există programări -->
             <ng-template #noAppointments>
                 <div class="no-appointments-message">Nu există programări.</div>
             </ng-template>
         </div>
     </div>
-    <div class="custom-card">
+    <div class="custom-card2">
         <div class="custom-card-header">
-            <h3>Programările mele</h3>
+            <p>Programările mele</p>
         </div>
-    
+
         <div class="custom-card-content1">
             <!-- My Appointments List -->
             <div *ngIf="getAppointmentsForPatient().length > 0 && id !== null; else noMyAppointments">
                 <ul class="appointments-list">
                     <li *ngFor="let appointment of getAppointmentsForPatient()" class="appointment-item">
                         <div class="appointment-details">
-                            <span 
-                                class="status" 
-                                [ngClass]="{
-                                    'status-scheduled': appointment.status.toLowerCase() === 'scheduled',
+                            <span class="status" [ngClass]="{
+                                    'status-scheduled': appointment.status.toLowerCase() === 'scheduled' || appointment.status.toLowerCase() === 'confirmed' || appointment.status.toLowerCase() === 'programat',
                                     'status-pending': appointment.status.toLowerCase() === 'pending',
                                     'status-rejected': appointment.status.toLowerCase() === 'rejected'
-                                }"
-                            >
+                                }">
                                 {{ getStatusTranslation(appointment.status).toUpperCase() }}
+
                             </span>
+
                             <span class="appointment-time">
-                                {{ appointment.startTime }} - {{ appointment.endTime  }}
+                                {{ appointment.startTime }} - {{ appointment.endTime }}
+
                             </span>
-                            
+
+
                         </div>
 
-    
+
                         <!-- Cancel Button for Pending Appointments -->
-                        <!-- <button 
+                        <button 
                             *ngIf="appointment.status.toLowerCase() === 'pending'"
                             class="cancel-button"
                             (click)="cancelAppointment(appointment.appointmentId)"
                         >
                             Anulează
-                        </button> -->
+                        </button>
                     </li>
                 </ul>
             </div>
-    
+
             <!-- No My Appointments Message -->
             <ng-template #noMyAppointments>
                 <div class="no-appointments-message">Nu există programări</div>
             </ng-template>
         </div>
     </div>
-    
-    
-</div>
 
-    
+
+</div>

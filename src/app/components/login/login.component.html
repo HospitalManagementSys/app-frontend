@@ -1,115 +1,56 @@
-<!-- <div *ngIf="!isServer">
-      <div class="flex justify-center items-center">
+<div *ngIf="!isServer">
+    <div class="flex justify-center items-center">
         <div class="p-8">
             <div *ngIf="isAuthenticated(); else loginForm" class="text-center">
                 <h1 class="font-bold text-primary-darker">Sunteți deja autentificat!</h1>
                 <h4>Doriți să vă delogați?</h4>
-                
+
                 <div class="space-y-4">
                     <button class="button button-danger" (click)="onLogout()">
                         Delogare
                     </button>
-                    
+
                     <button class="button button-primary" (click)="onContinue()">
                         Continuă spre site
                     </button>
                 </div>
-                
+
                 <div *ngIf="errorMessage" id="errorMessage" class="error-message">
                     {{ errorMessage }}
                 </div>
             </div>
         </div>
     </div>
-    
 
-    <ng-template #loginForm> 
+    <ng-template #loginForm>
         <div class="body">
-          <div class="text-center">
-            <h1 class="title">Intra in contul tau</h1>
-          </div>
-          
-          <form class="form-container"  (ngSubmit)="onLogin()">
-            <mat-form-field class="form-field">
-                <mat-label>Email</mat-label>
-                <input matInput type="email" id="email"  [(ngModel)]="email"  name="email" placeholder="Email" required />
-            </mat-form-field>
-          
-            <mat-form-field class="form-field">
-                <mat-label>Parola</mat-label>
-                <input matInput type="password" id="password"  [(ngModel)]="password" name="password" placeholder="Parola" required />
-            </mat-form-field>
-          
-            <button class="button" type="submit">Autentificare</button>
-          </form>
-          
-          <button class="button" style="max-width: 400px; margin-top: 12px;" onclick="null">
-            Autentificare cu Google
-          </button>
-          
-          <div id="errorMessage" class="error-message" *ngIf="errorMessage">
-            {{ errorMessage }}
-          </div>
-          
-          </div>
-          <p>def</p>
-        
-       </ng-template>
-  </div>
+            <div class="text-center">
+                <h1 class="title">Intra in contul tau</h1>
+            </div>
 
-  -->
-<!-- Structura actuală -->
-<div *ngIf="!isServer">
-  <div class="flex justify-center items-center">
-      <div class="p-8">
-          <div *ngIf="isAuthenticated(); else loginForm" class="text-center">
-              <h1 class="font-bold text-primary-darker">Sunteți deja autentificat!</h1>
-              <h4>Doriți să vă delogați?</h4>
-              
-              <div class="space-y-4">
-                  <button class="button button-danger" (click)="onLogout()">
-                      Delogare
-                  </button>
-                  
-                  <button class="button button-primary" (click)="onContinue()">
-                      Continuă spre site
-                  </button>
-              </div>
-              
-              <div *ngIf="errorMessage" id="errorMessage" class="error-message">
-                  {{ errorMessage }}
-              </div>
-          </div>
-      </div>
-  </div>
-  
-  <ng-template #loginForm> 
-      <div class="body">
-          <div class="text-center">
-              <h1 class="title">Intra in contul tau</h1>
-          </div>
-          
-          <form class="form-container"  (ngSubmit)="onLogin()">
-              <mat-form-field class="form-field">
-                  <mat-label>Email</mat-label>
-                  <input matInput type="email" id="email" [(ngModel)]="email" name="email" placeholder="Email" required />
-              </mat-form-field>
-            
-              <mat-form-field class="form-field">
-                  <mat-label>Parola</mat-label>
-                  <input matInput type="password" id="password" [(ngModel)]="password" name="password" placeholder="Parola" required />
-              </mat-form-field>
-            
-              <button class="button" type="submit">Autentificare</button>
-          </form>
-          
-          <button class="button" style="max-width: 250px; margin-top: 12px;" onclick="null">
-              Autentificare cu Google
-          </button>
-          
-          <div id="errorMessage" class="error-message" *ngIf="errorMessage">
-              {{ errorMessage }}
-          </div>
-      </div>
-  </ng-template>
+            <form class="form-container" (ngSubmit)="onLogin()">
+                <mat-form-field class="form-field">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" id="email" [(ngModel)]="email" name="email" placeholder="Email"
+                        required />
+                </mat-form-field>
+
+                <mat-form-field class="form-field">
+                    <mat-label>Parola</mat-label>
+                    <input matInput type="password" id="password" [(ngModel)]="password" name="password"
+                        placeholder="Parola" required />
+                </mat-form-field>
+
+                <button class="button" type="submit">Autentificare</button>
+            </form>
+
+            <button class="button" style="max-width: 250px; margin-top: 12px;" onclick="null">
+                Autentificare cu Google
+            </button>
+
+            <div id="errorMessage" class="error-message" *ngIf="errorMessage">
+                {{ errorMessage }}
+            </div>
+        </div>
+    </ng-template>
 </div>

@@ -38,17 +38,14 @@ export class UserService {
     return this.http.get<User>(url, { headers: this.getAuthHeaders() });
   }
 
+  // Retrieve user data
   getUserData(): Observable<UserResponse> {
     const token = localStorage.getItem('auth_token');
-    console.log('🔹 Token trimis:', token);
-
     const url = `${this.apiUrl}/data`;
     return this.http
       .get<UserResponse>(url, { headers: this.getAuthHeaders() })
       .pipe(
-        tap((response) => {
-          console.log('✅ Răspuns primit de la backend:', response);
-        }),
+        tap((response) => {}),
         catchError((error) => {
           console.error('❌ Eroare la apelul getUserData():', error);
           return throwError(() => error);

@@ -42,18 +42,7 @@ export class DepartmentService {
     return this.http.get<Department>(url, { headers: this.getAuthHeaders() });
   }
 
-  //   // Retrieve departments by professor ID
-  //   getExamsByProfessorId(professorId: number): Observable<Exam[]> {
-  //     const url = `${this.apiUrl}/professor/${professorId}`;
-  //     return this.http.get<Exam[]>(url, { headers: this.getAuthHeaders() });
-  //   }
-
-  //   // Retrieve exams by degree ID
-  //   getExamsByDegreeId(degreeId: number): Observable<Exam[]> {
-  //     const url = `${this.apiUrl}/degree/${degreeId}`;
-  //     return this.http.get<Exam[]>(url, { headers: this.getAuthHeaders() });
-  //   }
-
+  // Retrieve doctors from a single department
   getDoctorsByDepartment(departmentId: number): Observable<Doctor[]> {
     return this.http.get<Doctor[]>(`${this.apiUrl}/${departmentId}/doctors`);
   }

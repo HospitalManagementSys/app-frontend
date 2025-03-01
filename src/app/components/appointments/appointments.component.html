@@ -1,12 +1,13 @@
 <div class="grid-container">
-    <div *ngFor="let appointment of filteredAppointments" class="card">
+    <div *ngFor="let appointment of filteredAppointments" class="card" (click)="openDialog(appointment)">
       <div class="card-header">
-        <h6>ID Pacient: {{ appointment.patientId }}</h6>
+        <h6>{{ appointment.patientId }}</h6>
+
       </div>
         <div class="card-content">
         <p><strong>Status:</strong> 
           <span class="status" [ngClass]="{
-            'scheduled': appointment.status.toLowerCase() === 'confirmed',
+            'scheduled': appointment.status.toLowerCase() === 'confirmed' ||  appointment.status.toLowerCase() === 'programat',
             'pending': appointment.status.toLowerCase() === 'pending',
             'rejected': appointment.status.toLowerCase() === 'rejected'
           }">

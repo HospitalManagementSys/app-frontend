@@ -1,0 +1,38 @@
+<h3 class="dialog-title">Detalii Programare</h3>
+
+<div class="dialog-content">
+  <div class="details-grid">
+    <div class="detail-item">
+      <strong>Status</strong>
+      <span>{{ appointment.status }}</span>
+    </div>
+    <div class="detail-item">
+      <strong>Data</strong>
+      <span>{{ appointment.date }}</span>
+    </div>
+    <div class="detail-item">
+      <strong>Ora de incepere</strong>
+      <span>{{appointment.startTime}} </span>
+    </div>
+    <div class="detail-item">
+        <strong>Ora de terminare</strong>
+        <span>{{ appointment.endTime }} </span>
+      </div>
+  </div>
+</div>
+
+<div class="dialog-actions">
+  <button 
+    class="accept-btn" 
+    (click)="onAccept()" 
+    [disabled]="appointment.status === 'scheduled' || appointment.status === 'rejected'">
+    Acceptă
+  </button>
+
+  <button 
+    class="reject-btn" 
+    (click)="onReject()" 
+    [disabled]="appointment.status === 'scheduled' || appointment.status === 'rejected'">
+    Respinge
+  </button>
+</div>
