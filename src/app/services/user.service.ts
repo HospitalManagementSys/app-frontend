@@ -52,13 +52,13 @@ export class UserService {
         })
       );
   }
+
   getPatientByUserId(userId: number): Observable<Patient> {
     return this.http
       .get<Patient>(`${this.patientApiUrl}/${userId}`, {
         headers: this.getAuthHeaders(),
       })
       .pipe(
-        tap((patient) => console.log('✅ Pacient găsit:', patient)),
         catchError((error) => {
           console.error('❌ Eroare la preluarea pacientului:', error);
           return throwError(() => error);

@@ -1,6 +1,8 @@
     <div class="nav">
         <button class="btn" (click)="showContent('despre-noi')">Despre noi</button>
         <button class="btn" (click)="showContent('contact')">Contact</button>
+        <button class="btn" *ngIf="isPatient()" (click)="showContent('programari')">Programarile mele</button>
+        <button class="btn" *ngIf="isPatient()" (click)="showDepartments()">Programeaza</button>
     </div>
    
     
@@ -150,3 +152,31 @@
         </div>
     </div>
 
+
+    <div *ngIf="activeSection === 'programari'" id="programari">
+        <div *ngIf="appointments.length > 0; else noAppointments">
+            
+   
+          <div *ngFor="let appointment of appointments" class="card-contentApp">
+            <div class="card-headerApp">
+                <p>{{appointment.date}}</p>
+            </div>
+            <p><strong>Status:</strong> 
+              <span class="status" [ngClass]="{
+                'scheduled': appointment.status.toLowerCase() === 'confirmed' || appointment.status.toLowerCase() === 'programat',
+                'pending': appointment.status.toLowerCase() === 'pending',
+                'rejected': appointment.status.toLowerCase() === 'rejected'
+              }">
+                {{ appointment.status }}
+              </span>
+            </p>
+            <p><strong>Interval orar:</strong> {{ appointment.startTime}} -  {{ appointment.endTime}}</p>
+          </div>
+        </div>
+      
+        <!-- Mesaj dacă nu sunt programări -->
+        <ng-template #noAppointments>
+          <p>Nu există programări disponibile.</p>
+        </ng-template>
+      </div>
+      

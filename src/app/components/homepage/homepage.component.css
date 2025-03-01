@@ -196,3 +196,58 @@
     }
 }
 
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 20px;
+}
+
+.card-headerApp {
+    background: linear-gradient(to right, rgb(245, 71, 71), rgb(163, 26, 26));
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px; 
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    max-width: 250px;
+
+}
+
+.card-contentApp {
+    padding: 15px;
+    font-size: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+    cursor: pointer;
+    max-width: 250px;
+
+}
+
+.status {
+    font-weight: bold;
+}
+
+.scheduled {
+    color: green;
+}
+
+.pending {
+    color: orange;
+}
+
+.rejected {
+    color: red;
+}

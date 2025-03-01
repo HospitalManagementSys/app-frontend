@@ -62,4 +62,13 @@ export class AppointmentsService {
       headers: this.getAuthHeaders(),
     });
   }
+
+  // Get appointments for a patient
+  getAppointmentsForPatient(patientId: number): Observable<Appointment[]> {
+    const token = localStorage.getItem('auth_token');
+    const url = `${this.apiUrl}/patient/${patientId}`;
+    return this.http.get<Appointment[]>(url, {
+      headers: this.getAuthHeaders(),
+    });
+  }
 }

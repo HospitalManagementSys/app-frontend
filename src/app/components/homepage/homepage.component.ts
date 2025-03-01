@@ -7,7 +7,12 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { UserResponse } from '../../models/user.model';
+import { AppointmentsService } from '../../services/appointment.service';
+import { Appointment } from '../../models/appointment.model';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-homepage',
@@ -16,6 +21,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './homepage.component.css',
 })
 export class HomepageComponent implements OnInit {
+  appointments: Appointment[] = [];
+  userRole: string | null = null;
+
   slides = [
     {
       imageUrl:
@@ -45,6 +53,19 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     this.startAutoSlide();
     document.addEventListener('slider', this.showSlider.bind(this));
+    this.loadMyAppointments();
+    this.userService.getUserData().subscribe({
+      next: (data: UserResponse) => {
+        if (data.patient) {
+          this.userRole = 'Patient';
+        } else if (data.doctor) {
+          this.userRole = 'Doctor';
+        }
+      },
+      error: (err) => {
+        console.error('❌ Eroare la preluarea datelor utilizatorului:', err);
+      },
+    });
   }
 
   startAutoSlide() {
@@ -61,7 +82,13 @@ export class HomepageComponent implements OnInit {
     this.currentSlide =
       (this.currentSlide - 1 + this.slides.length) % this.slides.length;
   }
-  constructor(private cdRef: ChangeDetectorRef) {}
+  constructor(
+    private cdRef: ChangeDetectorRef,
+    private userService: UserService,
+    private appointmentService: AppointmentsService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   @Input() activeSection: string = 'slider';
   @Output() sectionChange = new EventEmitter<string>();
@@ -78,5 +105,41 @@ export class HomepageComponent implements OnInit {
 
   showSlider() {
     this.activeSection = 'slider';
+  }
+
+  loadMyAppointments(): void {
+    this.userService.getUserData().subscribe({
+      next: (data: UserResponse) => {
+        if (data.patient) {
+          const patientId = data.patient.patientId;
+
+          this.appointmentService
+            .getAppointmentsForPatient(patientId)
+            .subscribe({
+              next: (appointments: Appointment[]) => {
+                this.appointments = appointments;
+                console.log('zzz' + this.appointments);
+                //  /     this.filteredAppointments = [...this.appointments];
+              },
+              error: (err) => {
+                console.error('❌ Eroare la preluarea programărilor:', err);
+              },
+            });
+        } else {
+          console.error('❌ Utilizatorul nu este doctor!');
+        }
+      },
+      error: (err) => {
+        console.error('❌ Eroare la preluarea datelor utilizatorului:', err);
+      },
+    });
+  }
+
+  showDepartments() {
+    this.router.navigate(['/patient/requests']);
+  }
+
+  isPatient(): boolean {
+    return this.authService.isAuthenticated() && this.userRole === 'Patient';
   }
 }

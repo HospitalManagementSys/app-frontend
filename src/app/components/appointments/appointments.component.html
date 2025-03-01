@@ -1,7 +1,7 @@
 <div class="grid-container">
     <div *ngFor="let appointment of filteredAppointments" class="card" (click)="openDialog(appointment)">
       <div class="card-header">
-        <h6>{{ appointment.patientId }}</h6>
+        <h6>{{ appointment.patient?.user?.firstName }}  {{appointment.patient?.user?.lastName}}</h6>
 
       </div>
         <div class="card-content">

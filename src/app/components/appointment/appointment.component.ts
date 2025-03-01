@@ -81,7 +81,6 @@ export class AppointmentComponent implements OnInit {
       this.userService.getPatientByUserId(this.id).subscribe({
         next: (patient) => {
           this.patientId = Number(patient.patientId);
-          console.log('✅ ID pacient obținut:', this.patientId);
         },
         error: (err) => console.error('❌ Eroare la preluarea patientId:', err),
       });
@@ -183,14 +182,23 @@ export class AppointmentComponent implements OnInit {
   }
 
   getAppointments(): Appointment[] {
-    if (!this.selectedDate || !this.selectedTimeStart) {
+    if (
+      !this.selectedDate ||
+      !this.selectedTimeStart ||
+      !this.selectedTimeEnd ||
+      !this.doctorId
+    ) {
       return [];
     }
 
-    const selectedDateTimeString = `${this.selectedDate}T${this.selectedTimeStart}`;
-    const selectedDateTime = new Date(selectedDateTimeString);
+    const selectedStart = new Date(
+      `${this.selectedDate}T${this.selectedTimeStart}`
+    );
+    const selectedEnd = new Date(
+      `${this.selectedDate}T${this.selectedTimeEnd}`
+    );
 
-    if (isNaN(selectedDateTime.getTime())) {
+    if (isNaN(selectedStart.getTime()) || isNaN(selectedEnd.getTime())) {
       this.snackBarService.show(
         'Data sau intervalul orar selectat este invalid!',
         'error'
@@ -198,34 +206,49 @@ export class AppointmentComponent implements OnInit {
       return [];
     }
 
-    return this.myAppointments.filter((appointment) => {
-      if (!appointment.date || !appointment.startTime || !appointment.endTime) {
-        this.snackBarService.show('Skipping invalid appointment', 'error');
+    const filteredAppointments = this.myAppointments.filter((appointment) => {
+      if (
+        !appointment.date ||
+        !appointment.startTime ||
+        !appointment.endTime ||
+        !appointment.status ||
+        !appointment.doctorId
+      ) {
         return false;
       }
 
-      const appointmentStartString = `${appointment.date}T${appointment.startTime}`;
-      const appointmentEndString = `${appointment.date}T${appointment.endTime}`;
+      const ignoredStatuses = ['ANULAT', 'CANCELED'];
+      if (ignoredStatuses.includes(appointment.status.toUpperCase())) {
+        return false;
+      }
 
-      const appointmentStart = new Date(appointmentStartString);
-      const appointmentEnd = new Date(appointmentEndString);
+      if (Number(appointment.doctorId) !== Number(this.doctorId)) {
+        return false;
+      }
+
+      const appointmentStart = new Date(
+        `${appointment.date}T${appointment.startTime}`
+      );
+      const appointmentEnd = new Date(
+        `${appointment.date}T${appointment.endTime}`
+      );
 
       if (
         isNaN(appointmentStart.getTime()) ||
         isNaN(appointmentEnd.getTime())
       ) {
-        console.error('❌ Invalid appointment times:', {
-          appointmentStartString,
-          appointmentEndString,
-        });
+        console.error('❌ Invalid appointment times:', appointment);
         return false;
       }
 
       return (
-        appointmentStart <= selectedDateTime &&
-        selectedDateTime < appointmentEnd
+        (selectedStart >= appointmentStart && selectedStart < appointmentEnd) || // Start selectat este în interval
+        (selectedEnd > appointmentStart && selectedEnd <= appointmentEnd) || // End selectat este în interval
+        (selectedStart <= appointmentStart && selectedEnd >= appointmentEnd) // Intervalul selectat acoperă complet programarea existentă
       );
     });
+
+    return filteredAppointments;
   }
 
   getStatusTranslation(status: string): string {
@@ -278,7 +301,6 @@ export class AppointmentComponent implements OnInit {
   onOfficeChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     this.selectedOfficeId = Number(target.value);
-    console.log('🔹 Office ID selectat:', this.selectedOfficeId);
   }
 
   // Validators
@@ -311,25 +333,45 @@ export class AppointmentComponent implements OnInit {
     }
     return null;
   }
+
   timeOverlapValidator(control: AbstractControl): ValidationErrors | null {
     if (
       !this.selectedDate ||
       !this.selectedTimeStart ||
-      !this.selectedTimeEnd //||
-      //  !this.appointments
+      !this.selectedTimeEnd ||
+      !this.myAppointments
     ) {
       return null;
     }
 
-    const selectedStart = new Date(this.selectedDate);
-    const [startHour, startMinute] = this.selectedTimeStart
-      .split(':')
-      .map(Number);
-    selectedStart.setHours(startHour, startMinute, 0, 0);
+    // Creăm obiecte Date pentru ora selectată de start și end
+    const selectedStart = new Date(
+      `${this.selectedDate}T${this.selectedTimeStart}`
+    );
+    const selectedEnd = new Date(
+      `${this.selectedDate}T${this.selectedTimeEnd}`
+    );
 
-    const selectedEnd = new Date(this.selectedDate);
-    const [endHour, endMinute] = this.selectedTimeEnd.split(':').map(Number);
-    selectedEnd.setHours(endHour, endMinute, 0, 0);
+    for (const appointment of this.myAppointments) {
+      if (!appointment.date || !appointment.startTime || !appointment.endTime) {
+        continue; // Evită programările invalide
+      }
+
+      const appointmentStart = new Date(
+        `${appointment.date}T${appointment.startTime}`
+      );
+      const appointmentEnd = new Date(
+        `${appointment.date}T${appointment.endTime}`
+      );
+
+      if (
+        (selectedStart >= appointmentStart && selectedStart < appointmentEnd) || // Ora de start este în interiorul unei alte programări
+        (selectedEnd > appointmentStart && selectedEnd <= appointmentEnd) || // Ora de end este în interiorul unei alte programări
+        (selectedStart <= appointmentStart && selectedEnd >= appointmentEnd) // Intervalul selectat acoperă complet programarea existentă
+      ) {
+        return { overlappingAppointment: true };
+      }
+    }
 
     return null;
   }
@@ -402,6 +444,7 @@ export class AppointmentComponent implements OnInit {
     this.appointmentService.createAppointment(newAppointment).subscribe({
       next: (data: Appointment) => {
         this.router.navigate(['/patient/requests']);
+        this.snackBarService.show('Programare creata cu succes!');
       },
       error: (err) => {
         this.snackBarService.show(err.error.message);
@@ -428,7 +471,7 @@ export class AppointmentComponent implements OnInit {
         patientId: appointmentToCancel.patientId, // Preia pacientul existent
         doctorId: appointmentToCancel.doctorId, // Preia doctorul existent
         officeId: appointmentToCancel.officeId, // Preia biroul existent
-        status: 'ANULAT', // Setează noul status
+        status: 'Anulat', // Setează noul status
         startTime: appointmentToCancel.startTime, // Păstrează orele existente
         endTime: appointmentToCancel.endTime,
         date: appointmentToCancel.date, // Păstrează data programării
