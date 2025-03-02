@@ -3,9 +3,9 @@
         <button class="btn" (click)="showContent('contact')">Contact</button>
         <button class="btn" *ngIf="isPatient()" (click)="showContent('programari')">Programarile mele</button>
         <button class="btn" *ngIf="isPatient()" (click)="showDepartments()">Programeaza</button>
+        <button class="btn" *ngIf="isDoctor()" (click)="showAppointments()">Programari</button>
     </div>
    
-    
 <div  *ngIf="activeSection === 'despre-noi'"   id="despre-noi">
  
 <div class="card">
@@ -80,8 +80,8 @@
             <h1>Contact MedicaNova Hospital</h1>
         </div>
         <div class="card-content">
-            <p><strong>Adresă:</strong> Strada Gheorghe Săulescu 43 A, Iași 700010</p>
-            <p><strong>Telefon:</strong> 0332 803 783 / 0332 803 793</p>
+            <p><strong>Adresă:</strong> Strada Gheorghe Săulescu 48 B</p>
+            <p><strong>Telefon:</strong> 0332 803 873 / 0332 083 793</p>
             <p><strong>Email:</strong> info&#64;medicanova-hospital.ro</p>
         </div>
     </div>
@@ -154,7 +154,7 @@
 
 
     <div *ngIf="activeSection === 'programari'" id="programari">
-        <div *ngIf="appointments.length > 0; else noAppointments">
+        <div *ngIf="appointments.length > 0; else noAppointments" class="grid-container">
             
    
           <div *ngFor="let appointment of appointments" class="card-contentApp">
@@ -165,18 +165,18 @@
               <span class="status" [ngClass]="{
                 'scheduled': appointment.status.toLowerCase() === 'confirmed' || appointment.status.toLowerCase() === 'programat',
                 'pending': appointment.status.toLowerCase() === 'pending',
-                'rejected': appointment.status.toLowerCase() === 'rejected'
+                'rejected': appointment.status.toLowerCase() === 'respins'
               }">
-                {{ appointment.status }}
+                {{ getStatusTranslation(appointment.status)}}
               </span>
             </p>
             <p><strong>Interval orar:</strong> {{ appointment.startTime}} -  {{ appointment.endTime}}</p>
           </div>
         </div>
-      
+    </div>
         <!-- Mesaj dacă nu sunt programări -->
         <ng-template #noAppointments>
-          <p>Nu există programări disponibile.</p>
+          <p class="message">Nu aveti nicio programare efectuata.</p>
         </ng-template>
-      </div>
       
+    

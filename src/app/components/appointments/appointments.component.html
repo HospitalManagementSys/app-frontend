@@ -9,10 +9,10 @@
           <span class="status" [ngClass]="{
             'scheduled': appointment.status.toLowerCase() === 'confirmed' ||  appointment.status.toLowerCase() === 'programat',
             'pending': appointment.status.toLowerCase() === 'pending',
-            'rejected': appointment.status.toLowerCase() === 'rejected'
+            'rejected': appointment.status.toLowerCase() === 'respins'
           }">
-            {{ appointment.status }}
-          </span>
+                               {{ getStatusTranslation(appointment.status) }}
+                              </span>
         </p>
         <p><strong>Data:</strong> {{ appointment.date | date: 'dd.MM.yyyy' }}</p>
       </div>

@@ -131,9 +131,9 @@
                             <span class="status" [ngClass]="{
                                     'status-scheduled': appointment.status.toLowerCase() === 'scheduled' || appointment.status.toLowerCase() === 'confirmed' || appointment.status.toLowerCase() === 'programat',
                                     'status-pending': appointment.status.toLowerCase() === 'pending',
-                                    'status-rejected': appointment.status.toLowerCase() === 'rejected'
+                                    'status-rejected': appointment.status.toLowerCase() === 'respins'
                                 }">
-                                {{ getStatusTranslation(appointment.status).toUpperCase() }}
+                                {{ getStatusTranslation(appointment.status) }}
 
                             </span>
 

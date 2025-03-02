@@ -13,6 +13,7 @@ import { UserResponse } from '../../models/user.model';
 import { AppointmentsService } from '../../services/appointment.service';
 import { Appointment } from '../../models/appointment.model';
 import { AuthService } from '../../services/auth.service';
+import { StatusTranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-homepage',
@@ -53,7 +54,8 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     this.startAutoSlide();
     document.addEventListener('slider', this.showSlider.bind(this));
-    this.loadMyAppointments();
+    this.loadPatientAppointments();
+    this.loadDoctorAppointments();
     this.userService.getUserData().subscribe({
       next: (data: UserResponse) => {
         if (data.patient) {
@@ -87,7 +89,8 @@ export class HomepageComponent implements OnInit {
     private userService: UserService,
     private appointmentService: AppointmentsService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private statusTranslationService: StatusTranslationService
   ) {}
 
   @Input() activeSection: string = 'slider';
@@ -107,7 +110,7 @@ export class HomepageComponent implements OnInit {
     this.activeSection = 'slider';
   }
 
-  loadMyAppointments(): void {
+  loadPatientAppointments(): void {
     this.userService.getUserData().subscribe({
       next: (data: UserResponse) => {
         if (data.patient) {
@@ -119,7 +122,6 @@ export class HomepageComponent implements OnInit {
               next: (appointments: Appointment[]) => {
                 this.appointments = appointments;
                 console.log('zzz' + this.appointments);
-                //  /     this.filteredAppointments = [...this.appointments];
               },
               error: (err) => {
                 console.error('❌ Eroare la preluarea programărilor:', err);
@@ -134,12 +136,46 @@ export class HomepageComponent implements OnInit {
       },
     });
   }
+  loadDoctorAppointments(): void {
+    this.userService.getUserData().subscribe({
+      next: (data: UserResponse) => {
+        if (data.doctor) {
+          const doctorId = data.doctor.doctorId;
+
+          this.appointmentService.getAppointmentsForDoctor(doctorId).subscribe({
+            next: (appointments: Appointment[]) => {
+              this.appointments = appointments;
+            },
+            error: (err) => {
+              console.error('❌ Eroare la preluarea programărilor:', err);
+            },
+          });
+        } else {
+          console.error('❌ Utilizatorul nu este doctor!');
+        }
+      },
+      error: (err) => {
+        console.error('❌ Eroare la preluarea datelor utilizatorului:', err);
+      },
+    });
+  }
 
   showDepartments() {
     this.router.navigate(['/patient/requests']);
   }
+  showAppointments() {
+    this.router.navigate(['/doctor/appointments']);
+  }
 
   isPatient(): boolean {
     return this.authService.isAuthenticated() && this.userRole === 'Patient';
+  }
+  isDoctor(): boolean {
+    return this.authService.isAuthenticated() && this.userRole === 'Doctor';
+  }
+  getStatusTranslation(status: string): string {
+    const translatedStatus =
+      this.statusTranslationService.getStatusTranslation(status);
+    return translatedStatus;
   }
 }

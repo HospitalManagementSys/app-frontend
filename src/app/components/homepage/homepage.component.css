@@ -200,9 +200,8 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    padding: 20px;
+    grid-template-columns: repeat(4, 6fr);
+    padding: 30px;
 }
 
 .card-headerApp {
@@ -230,7 +229,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    position: relative;
     cursor: pointer;
     max-width: 250px;
 
@@ -250,4 +248,12 @@
 
 .rejected {
     color: red;
+}
+.message{
+    color:black;
+    font-weight: bold;
+    font-size: 20px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
 }

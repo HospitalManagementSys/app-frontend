@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { SnackBarService } from '../../services/snack-bar.service';
 import { ActivatedRoute } from '@angular/router';
+import { StatusTranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-appointments',
@@ -29,7 +30,8 @@ export class AppointmentsComponent implements OnInit {
     private userService: UserService,
     private dialog: MatDialog,
     private snackBarService: SnackBarService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private statusTranslationService: StatusTranslationService
   ) {}
 
   ngOnInit(): void {
@@ -86,5 +88,11 @@ export class AppointmentsComponent implements OnInit {
           this.snackBarService.show('Nu am modificat cererea!', 'error');
         }
       );
+  }
+
+  getStatusTranslation(status: string): string {
+    const translatedStatus =
+      this.statusTranslationService.getStatusTranslation(status);
+    return translatedStatus;
   }
 }
