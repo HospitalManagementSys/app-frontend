@@ -2,7 +2,6 @@
         <div class="logo">
             <img src="https://i.imgur.com/OzTdfKf.png" alt="Spital Logo" (click)="onLogoClick()">
         </div>
-    <!-- <div class="heart"></div> -->
         <div class="contact-info">
         
             <div class="text-container">
@@ -13,6 +12,8 @@
                 <button class="button toggle-auth" (click)="toggleAuth()">
                 {{ isAuthenticated() ? 'Logout' : 'Login' }}
               </button>
-        </div>
+              <button *ngIf="!isAuthenticated()" class="button toggle-auth" (click)="onRegister()">
+                Register
+            </button>        </div>
     </header>
     

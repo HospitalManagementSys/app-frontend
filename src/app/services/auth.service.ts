@@ -1,6 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../environments/environment';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -20,6 +20,10 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>(this.apiUrl, { email, password });
+  }
+  setToken(token: string): void {
+    this.token = token;
+    localStorage.setItem('auth_token', token);
   }
 
   saveToken(token: string): void {
@@ -83,5 +87,25 @@ export class AuthService {
       return false;
     }
     return !this.isTokenExpired(this.token);
+  }
+
+  // registerPatient(userData: {
+  //   email: string;
+  //   password: string;
+  //   firstName: string;
+  //   lastName: string;
+  // }): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/register`, userData);
+  // }
+  registerPatient(userData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, userData).pipe(
+      tap((response) =>
+        console.log('✅ Răspuns primit de la backend:', response)
+      ),
+      catchError((error) => {
+        console.error('❌ Eroare la înregistrare:', error);
+        return throwError(() => error);
+      })
+    );
   }
 }

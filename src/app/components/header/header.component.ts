@@ -7,12 +7,13 @@ import { UserResponse } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
 import { SnackBarService } from '../../services/snack-bar.service';
+import { FormsModule } from '@angular/forms';
 
 type UserRole = 'doctor' | 'patient';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule, HttpClientModule],
+  imports: [RouterModule, HttpClientModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -99,5 +100,9 @@ export class HeaderComponent {
   }
   isAuthenticated() {
     return this.authService.isAuthenticated();
+  }
+
+  onRegister() {
+    this.router.navigate(['/register']);
   }
 }

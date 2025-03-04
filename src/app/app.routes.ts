@@ -6,6 +6,7 @@ import { RequestComponent } from './components/request/request.component';
 import { AppointmentsComponent } from './components/appointments/appointments.component';
 import { authGuard } from '../guards/auth.guard';
 import { AppointmentComponent } from './components/appointment/appointment.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -34,6 +35,8 @@ export const routes: Routes = [
     canActivate: [authGuard],
     data: { requiredRole: 'Doctor' },
   },
+  { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+
   { path: '**', redirectTo: 'homepage' },
 ];
