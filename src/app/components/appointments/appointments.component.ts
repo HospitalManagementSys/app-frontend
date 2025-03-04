@@ -10,10 +10,11 @@ import { ModalComponent } from '../modal/modal.component';
 import { SnackBarService } from '../../services/snack-bar.service';
 import { ActivatedRoute } from '@angular/router';
 import { StatusTranslationService } from '../../services/translation.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-appointments',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './appointments.component.html',
   styleUrl: './appointments.component.css',
 })
@@ -23,6 +24,8 @@ export class AppointmentsComponent implements OnInit {
   doctorId!: number;
   id: number | null = null;
   patientId: number | null = null;
+  statusFilter: string = '';
+  dateFilter: string | null = null;
 
   constructor(
     private appointmentService: AppointmentsService,
@@ -94,5 +97,32 @@ export class AppointmentsComponent implements OnInit {
     const translatedStatus =
       this.statusTranslationService.getStatusTranslation(status);
     return translatedStatus;
+  }
+
+  applyFilters(): void {
+    this.filteredAppointments = this.appointments.filter((appointment) => {
+      console.log(this.getStatusTranslation(this.statusFilter).toLowerCase());
+      const matchesStatus =
+        this.statusFilter === '' ||
+        appointment.status.toLowerCase() ===
+          this.getStatusTranslation(this.statusFilter).toLowerCase();
+
+      const matchesDate = this.dateFilter
+        ? new Date(appointment.date).toISOString().split('T')[0] ===
+          this.dateFilter
+        : true;
+
+      return matchesStatus && matchesDate;
+    });
+  }
+
+  onStatusFilterChange(event: Event): void {
+    this.statusFilter = (event.target as HTMLSelectElement).value;
+    this.applyFilters();
+  }
+
+  onDateFilterChange(event: string | null): void {
+    this.dateFilter = event;
+    this.applyFilters();
   }
 }
