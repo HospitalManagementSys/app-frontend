@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
+import { GoogleAuthService } from '../../services/googleAuthService';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,11 @@ export class LoginComponent {
   users: any = [];
   isServer = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private googleService: GoogleAuthService
+  ) {}
 
   ngOnInit(): void {
     //this.googleService.getFirebaseUserData();
@@ -74,5 +79,25 @@ export class LoginComponent {
   onLogout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  handleGoogleLogin() {
+    this.googleService
+      .signInWithGoogle()
+      .then(() => {
+        const role = this.authService.getRole();
+
+        if (role === 'Patient') {
+          this.router.navigate(['/patient/requests']);
+        } else if (role === 'Doctor') {
+          this.router.navigate(['/doctor/appointments']);
+        } else {
+          this.errorMessage = 'Rol necunoscut';
+        }
+      })
+      .catch((error) => {
+        console.error('Eroare la autentificare:', error);
+        this.errorMessage = 'Autentificare Google eșuată.';
+      });
   }
 }

@@ -121,14 +121,13 @@ export class HomepageComponent implements OnInit {
             .subscribe({
               next: (appointments: Appointment[]) => {
                 this.appointments = appointments;
-                console.log('zzz' + this.appointments);
               },
               error: (err) => {
-                console.error('❌ Eroare la preluarea programărilor:', err);
+                // console.error('❌ Eroare la preluarea programărilor:', err);
               },
             });
         } else {
-          console.error('❌ Utilizatorul nu este doctor!');
+          // console.error('❌ Utilizatorul nu este doctor!');
         }
       },
       error: (err) => {
@@ -151,12 +150,9 @@ export class HomepageComponent implements OnInit {
             },
           });
         } else {
-          console.error('❌ Utilizatorul nu este doctor!');
         }
       },
-      error: (err) => {
-        console.error('❌ Eroare la preluarea datelor utilizatorului:', err);
-      },
+      error: (err) => {},
     });
   }
 

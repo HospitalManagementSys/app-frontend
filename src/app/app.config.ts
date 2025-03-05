@@ -10,9 +10,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { initializeFirebase } from './firebase-config';
 
 export function initializeAuth(authService: AuthService): () => Promise<void> {
   return () => authService.loadAuthState();
+}
+export function initializeAppFirebase(): () => Promise<void> {
+  return () => initializeFirebase();
 }
 
 export const appConfig: ApplicationConfig = {
@@ -25,6 +29,11 @@ export const appConfig: ApplicationConfig = {
       provide: APP_INITIALIZER,
       useFactory: initializeAuth,
       deps: [AuthService],
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeAppFirebase, // Inițializează Firebase
       multi: true,
     },
   ],
