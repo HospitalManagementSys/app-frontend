@@ -71,4 +71,7 @@ export class AppointmentsService {
       headers: this.getAuthHeaders(),
     });
   }
+  deleteAppointment(appointmentId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${appointmentId}`);
+  }
 }

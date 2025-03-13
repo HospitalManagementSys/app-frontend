@@ -1,0 +1,35 @@
+<div class="filters-container">
+    <div class="filters">
+    <!-- Filtru pentru status -->
+    <select class="border rounded p-2" [(ngModel)]="statusFilter" (change)="onStatusFilterChange($event)">
+     <option value="">Toate statusurile</option>
+     <option value="scheduled">Programat</option>
+     <option value="pending">In asteptare</option>
+     <option value="rejected">Respins</option>
+   </select>
+   <!-- Filtru pentru data -->
+   <input type="date" class="border rounded p-2" [(ngModel)]="dateFilter" (change)="applyFilters()" />
+  </div>
+  </div>
+  
+  <div class="grid-container">
+    
+    <div *ngFor="let appointment of filteredAppointments" class="card" (click)="openDialog(appointment)">
+      <div class="card-header">
+        <h6>{{ appointment.patient?.user?.firstName }} {{appointment.patient?.user?.lastName}}</h6>
+  
+      </div>
+      <div class="card-content">
+        <p><strong>Status:</strong>
+          <span class="status" [ngClass]="{
+              'scheduled': appointment.status.toLowerCase() === 'programat',
+              'pending': appointment.status.toLowerCase() === 'pending',
+              'rejected': appointment.status.toLowerCase() === 'respins'
+            }">
+            {{ getStatusTranslation(appointment.status) }} </span>
+        </p>
+        <p><strong>Data:</strong> {{ appointment.date | date: 'dd.MM.yyyy' }}</p>
+      </div>
+      <div class="tooltip">Click pentru mai multe detalii</div>
+    </div>
+  </div>

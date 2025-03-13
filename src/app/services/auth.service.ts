@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../environments/environment';
 import { isPlatformBrowser } from '@angular/common';
-
+import { User } from '../models/user.model';
 @Injectable({
   providedIn: 'root',
 })

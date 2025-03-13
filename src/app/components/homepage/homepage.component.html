@@ -4,6 +4,7 @@
         <button class="btn" *ngIf="isPatient()" (click)="showContent('programari')">Programarile mele</button>
         <button class="btn" *ngIf="isPatient()" (click)="showDepartments()">Programeaza</button>
         <button class="btn" *ngIf="isDoctor()" (click)="showAppointments()">Programari</button>
+        <button class="btn" *ngIf="isAdmin()" (click)="showAll()">Programari</button>
     </div>
    
 <div  *ngIf="activeSection === 'despre-noi'"   id="despre-noi">

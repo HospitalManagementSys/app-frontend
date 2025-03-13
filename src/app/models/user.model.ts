@@ -7,14 +7,14 @@ export class User {
   password?: string;
   firstName: string;
   lastName: string;
-  role: 'Doctor' | 'Patient';
+  role: 'Doctor' | 'Patient' | 'Admin';
 
   constructor(
     userId: number,
     email: string,
     firstName: string,
     lastName: string,
-    role: 'Doctor' | 'Patient',
+    role: 'Doctor' | 'Patient' | 'Admin',
     password?: string
   ) {
     this.userId = userId;

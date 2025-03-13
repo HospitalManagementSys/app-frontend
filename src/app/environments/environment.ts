@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  // apiUrl: 'http://localhost:8080',
-  apiUrl: 'https://app-backend-18el.onrender.com',
+  apiUrl: 'http://localhost:8080',
+  // apiUrl: 'https://app-backend-18el.onrender.com',
   firebaseConfig: {
     apiKey: 'AIzaSyAVX33F1IwZCLCv3xGvmkWCo-QcaepmapY',
     authDomain: 'hospitalmanagement-8944e.firebaseapp.com',

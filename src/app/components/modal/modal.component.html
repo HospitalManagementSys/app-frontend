@@ -23,16 +23,22 @@
 
 <div class="dialog-actions">
   <button 
+  *ngIf="role === 'Doctor'" 
     class="accept-btn" 
     (click)="onAccept()" 
-    [disabled]="appointment.status === 'programat' || appointment.status === 'anulat' || appointment.status ==='respins'">
+    [disabled]="appointment.status === 'Programat' || appointment.status === 'Anulat' || appointment.status ==='Respins'">
     Acceptă
   </button>
 
   <button 
+  *ngIf="role === 'Doctor'" 
     class="reject-btn" 
     (click)="onReject()" 
-    [disabled]="appointment.status === 'programat' || appointment.status === 'anulat' || appointment.status ==='respins'">
+    [disabled]="appointment.status === 'Programat' || appointment.status === 'Anulat' || appointment.status ==='Respins'">
     Respinge
   </button>
+    <!-- Butonul de ștergere pentru Admin -->
+    <button *ngIf="role === 'Admin'" class="reject-btn" (click)="onDeleteAppointment()">
+      Șterge Programarea
+    </button>
 </div>

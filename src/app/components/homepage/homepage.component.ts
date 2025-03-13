@@ -62,6 +62,8 @@ export class HomepageComponent implements OnInit {
           this.userRole = 'Patient';
         } else if (data.doctor) {
           this.userRole = 'Doctor';
+        } else if (data.user.role === 'Admin') {
+          this.userRole = 'Admin';
         }
       },
       error: (err) => {
@@ -123,11 +125,9 @@ export class HomepageComponent implements OnInit {
                 this.appointments = appointments;
               },
               error: (err) => {
-                // console.error('❌ Eroare la preluarea programărilor:', err);
+                console.error('❌ Eroare la preluarea programărilor:', err);
               },
             });
-        } else {
-          // console.error('❌ Utilizatorul nu este doctor!');
         }
       },
       error: (err) => {
@@ -162,12 +162,18 @@ export class HomepageComponent implements OnInit {
   showAppointments() {
     this.router.navigate(['/doctor/appointments']);
   }
+  showAll() {
+    this.router.navigate(['/admin']);
+  }
 
   isPatient(): boolean {
     return this.authService.isAuthenticated() && this.userRole === 'Patient';
   }
   isDoctor(): boolean {
     return this.authService.isAuthenticated() && this.userRole === 'Doctor';
+  }
+  isAdmin(): boolean {
+    return this.authService.isAuthenticated() && this.userRole === 'Admin';
   }
   getStatusTranslation(status: string): string {
     const translatedStatus =

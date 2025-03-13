@@ -12,10 +12,12 @@ import { UserService } from '../../services/user.service';
 import { Appointment } from '../../models/appointment.model';
 import { Patient } from '../../models/patient.model';
 import { AuthService } from '../../services/auth.service';
+import { AppointmentsService } from '../../services/appointment.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
 })
@@ -26,16 +28,25 @@ export class ModalComponent {
   patientId: number | null = null;
   id: number | null = null;
   patient: User | null = null;
+  role: string | null = null;
 
+  // constructor(
+  //   @Inject(MAT_DIALOG_DATA) public datas: { appointment: Appointment },
+  //   private userService: UserService
+  // ) {
+  //   this.appointment = this.datas.appointment;
+  // }
   constructor(
     @Inject(MAT_DIALOG_DATA) public datas: { appointment: Appointment },
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService,
+    private appointmentService: AppointmentsService
   ) {
     this.appointment = this.datas.appointment;
   }
-
   ngOnInit(): void {
     this.loadPatient();
+    this.role = this.authService.getRole();
   }
 
   loadPatient(): void {
@@ -71,5 +82,19 @@ export class ModalComponent {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  onDeleteAppointment(): void {
+    if (confirm('Sigur vrei să ștergi această programare?')) {
+      this.appointmentService
+        .deleteAppointment(this.appointment.appointmentId)
+        .subscribe(
+          () => {
+            this.dialogRef.close({ deleted: true });
+          },
+          (error) => {
+            console.error('❌ Eroare la ștergerea programării:', error);
+          }
+        );
+    }
   }
 }

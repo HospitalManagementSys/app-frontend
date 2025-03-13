@@ -50,6 +50,8 @@ export class LoginComponent {
           this.router.navigate(['/doctor/appointments']);
         } else if (response.role === 'Patient') {
           this.router.navigate(['/patient/requests']);
+        } else if (role === 'Admin') {
+          this.router.navigate(['/admin']);
         } else {
           this.errorMessage = 'Rol necunoscut';
         }
@@ -67,6 +69,8 @@ export class LoginComponent {
       this.router.navigate(['/doctor/appointments']);
     } else if (role === 'Patient') {
       this.router.navigate(['/patient/requests']);
+    } else if (role === 'Admin') {
+      this.router.navigate(['/admin']);
     } else {
       this.errorMessage = 'Rol necunoscut';
     }
@@ -91,6 +95,8 @@ export class LoginComponent {
           this.router.navigate(['/patient/requests']);
         } else if (role === 'Doctor') {
           this.router.navigate(['/doctor/appointments']);
+        } else if (role === 'Admin') {
+          this.router.navigate(['/admin']);
         } else {
           this.errorMessage = 'Rol necunoscut';
         }
