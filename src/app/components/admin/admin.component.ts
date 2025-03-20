@@ -7,10 +7,13 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { SnackBarService } from '../../services/snack-bar.service';
+import { AppSettingService } from '../../services/app-setting.service';
+import { AppSetting } from '../../models/app-setting.model';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-admin',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, MatButtonModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })
@@ -20,12 +23,14 @@ export class AdminComponent implements OnInit {
   statusFilter: string = '';
   filteredAppointments: Appointment[] = [];
   dateFilter: string | null = null;
+  isEmailEnabled: boolean = false;
 
   constructor(
     private appointmentService: AppointmentsService,
     private statusTranslationService: StatusTranslationService,
     private dialog: MatDialog,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private appSettingService: AppSettingService
   ) {}
 
   ngOnInit(): void {
@@ -101,6 +106,51 @@ export class AdminComponent implements OnInit {
       .updateAppointment(appointment.appointmentId, appointment)
       .subscribe(() => {
         this.snackBarService.show('Programarea a fost stearsa!', 'success');
+      });
+  }
+
+  loadInitialSettings(): void {
+    this.appSettingService.getSettings().subscribe({
+      next: (response: AppSetting[]) => {
+        const sendEmailsSetting = response.find(
+          (setting) => setting.name === 'sendEmails'
+        );
+        if (sendEmailsSetting && sendEmailsSetting.value !== undefined) {
+          this.isEmailEnabled = sendEmailsSetting.value;
+        } else {
+          this.snackBarService.show(
+            'Setarea "sendEmails" nu a fost găsită sau este invalidă!',
+            'error'
+          );
+        }
+      },
+      error: () => {
+        this.snackBarService.show('Eroare la preluarea setărilor!', 'error');
+      },
+    });
+  }
+
+  toggleEmailSetting(): void {
+    const updatedSetting = !this.isEmailEnabled;
+    this.appSettingService
+      .updateAppSetting('sendEmails', {
+        name: 'sendEmails',
+        value: updatedSetting,
+      })
+      .subscribe({
+        next: () => {
+          this.isEmailEnabled = updatedSetting;
+          const message = updatedSetting
+            ? 'Trimiterea de emailuri a fost activată!'
+            : 'Trimiterea de emailuri a fost dezactivată!';
+          this.snackBarService.show(message, 'success');
+        },
+        error: () => {
+          this.snackBarService.show(
+            'Eroare la actualizarea setărilor!',
+            'error'
+          );
+        },
       });
   }
 }

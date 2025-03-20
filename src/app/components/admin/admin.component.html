@@ -10,7 +10,20 @@
    <!-- Filtru pentru data -->
    <input type="date" class="border rounded p-2" [(ngModel)]="dateFilter" (change)="applyFilters()" />
   </div>
+  
+   <!-- Toggle Email Setting Button -->
+   <div class="button-container">
+    <button
+      mat-raised-button
+      class="custom-button"
+      [ngClass]="isEmailEnabled ? 'warn' : 'accent'"
+      (click)="toggleEmailSetting()"
+    >
+      {{ isEmailEnabled ? "🔴 Dezactivează trimiterea de emailuri" : "🟢 Activează trimiterea de emailuri" }}
+    </button>
   </div>
+  </div>
+  
   
   <div class="grid-container">
     
