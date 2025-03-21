@@ -54,22 +54,25 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     this.startAutoSlide();
     document.addEventListener('slider', this.showSlider.bind(this));
-    this.loadPatientAppointments();
-    this.loadDoctorAppointments();
-    this.userService.getUserData().subscribe({
-      next: (data: UserResponse) => {
-        if (data.patient) {
-          this.userRole = 'Patient';
-        } else if (data.doctor) {
-          this.userRole = 'Doctor';
-        } else if (data.user.role === 'Admin') {
-          this.userRole = 'Admin';
-        }
-      },
-      error: (err) => {
-        console.error('❌ Eroare la preluarea datelor utilizatorului:', err);
-      },
-    });
+    if (this.authService.isAuthenticated()) {
+      this.loadPatientAppointments();
+      this.loadDoctorAppointments();
+
+      this.userService.getUserData().subscribe({
+        next: (data: UserResponse) => {
+          if (data.patient) {
+            this.userRole = 'Patient';
+          } else if (data.doctor) {
+            this.userRole = 'Doctor';
+          } else if (data.user.role === 'Admin') {
+            this.userRole = 'Admin';
+          }
+        },
+        error: (err) => {
+          console.error('❌ Eroare la preluarea datelor utilizatorului:', err);
+        },
+      });
+    }
   }
 
   startAutoSlide() {

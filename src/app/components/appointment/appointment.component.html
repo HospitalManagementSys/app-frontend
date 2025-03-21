@@ -17,7 +17,8 @@
                 <!-- Date Picker -->
                 <div class="form-group">
                     <label for="dateInput">Data</label>
-                    <input type="date" id="dateInput" class="form-control" [formControl]="dateFormControl"
+                    <input type="date" id="dateInput" class="form-control"
+                     [formControl]="dateFormControl"
                         [min]="minDate" [max]="maxDate" [(ngModel)]="selectedDate" name="selectedDate"
                         (ngModelChange)="onDateChange($event)" required>
                     <span class="error-message"
