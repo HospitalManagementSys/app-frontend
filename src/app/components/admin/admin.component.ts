@@ -35,6 +35,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAppointments();
+    this.loadInitialSettings();
   }
   loadAppointments(): void {
     this.appointmentService.getAppointments().subscribe({

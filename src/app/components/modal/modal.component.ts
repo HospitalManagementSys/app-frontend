@@ -30,12 +30,6 @@ export class ModalComponent {
   patient: User | null = null;
   role: string | null = null;
 
-  // constructor(
-  //   @Inject(MAT_DIALOG_DATA) public datas: { appointment: Appointment },
-  //   private userService: UserService
-  // ) {
-  //   this.appointment = this.datas.appointment;
-  // }
   constructor(
     @Inject(MAT_DIALOG_DATA) public datas: { appointment: Appointment },
     private userService: UserService,
