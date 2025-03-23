@@ -8,14 +8,6 @@
     padding: 15px 50px;
     border-bottom: 2px solid #d1d1d1;
 }
-.logo img {
-    height: 60px;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-}
-.logo img:hover {
-    transform: scale(1.1); 
-}
 
 .contact-info {
     display: flex;
@@ -29,6 +21,35 @@
     flex-direction: column;
     text-align: right; 
 }
+
+.toggle-auth {
+    display: block;
+    background-color: #dc2626; 
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: background-color 0.3s ease-in-out;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 3.8);
+
+}
+.logo img {
+    height: 60px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+
+}
+.logo img:hover {
+    transform: scale(1.1); 
+}
+
+
 .contact-info p {
     margin: 5px;
     font-size: 14px;
@@ -95,23 +116,6 @@
     width: 100%;
 }
 
-.toggle-auth {
-    display: block;
-    background-color: #dc2626; 
-    color: white;
-    font-size: 16px;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 20px;
-    border: none;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 12px;
-    transition: background-color 0.3s ease-in-out;
-    margin-bottom: 20px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 3.8);
-
-}
 .toggle-auth:hover {
     background-color: white;
     color: #444;
