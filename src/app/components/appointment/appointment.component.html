@@ -83,9 +83,16 @@
                         </span>
                     </span>
                 </div>
+ 
+                <div class="form-group">
+
+                <label >Istoric Medical</label>
+                <button type="button" class="diagnosis" (click)="openMedicalHistoryDialog()">
+                  🔍 Vezi / Adaugă diagnostic
+                </button>
 
                 <button type="submit" class="custom-button" [disabled]="formDisabled">Programează</button>
-
+</div>
             </form>
 
         </div>

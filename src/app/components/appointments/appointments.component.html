@@ -30,6 +30,13 @@
       </p>
       <p><strong>Data:</strong> {{ appointment.date | date: 'dd.MM.yyyy' }}</p>
     </div>
+    <div class="card-actions">
+      <button 
+        class="diagnosis"
+        (click)="openMedicalHistory(appointment); $event.stopPropagation()">
+        Istoric medical
+      </button>
+    </div>
     <div class="tooltip">Click pentru mai multe detalii</div>
   </div>
 </div>

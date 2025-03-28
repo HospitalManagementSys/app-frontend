@@ -24,10 +24,19 @@ import { StatusTranslationService } from '../../services/translation.service';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { SnackBarService } from '../../services/snack-bar.service';
+import { MedicalHistoryComponent } from '../medical-history/medical-history.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
+  standalone: true,
   selector: 'app-appointment',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MedicalHistoryComponent,
+    MatDialogModule,
+  ],
   templateUrl: './appointment.component.html',
   styleUrl: './appointment.component.css',
   providers: [DatePipe],
@@ -67,7 +76,8 @@ export class AppointmentComponent implements OnInit {
     private authService: AuthService,
     private datePipe: DatePipe,
     private userService: UserService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -499,5 +509,12 @@ export class AppointmentComponent implements OnInit {
       this.selectedTimeEnd = null;
       this.selectedOfficeId = null;
     }
+  }
+
+  openMedicalHistoryDialog(): void {
+    this.dialog.open(MedicalHistoryComponent, {
+      width: '600px',
+      data: { patientId: this.patientId },
+    });
   }
 }

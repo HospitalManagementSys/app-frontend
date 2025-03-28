@@ -1,0 +1,40 @@
+<h2 class="dialog-title">Istoric Medical</h2>
+
+<div class="dialog-content">
+  <ul *ngIf="history.length > 0; else noHistory">
+    <li *ngFor="let entry of history" class="history-entry">
+      <strong>Diagnostic:</strong> {{ entry.diagnosis }} <br />
+      <strong>Data:</strong> {{ entry.data | date: 'yyyy-MM-dd' }}
+
+    </li>
+  </ul>
+
+  <ng-template #noHistory>
+    <p class="no-history">Nu există diagnostic înregistrat.</p>
+  </ng-template>
+
+  <form (ngSubmit)="submit()" #diagnosisForm="ngForm" class="diagnosis-form">
+    <label for="diagnosis">Diagnostic nou:</label>
+    <input
+      type="text"
+      id="diagnosis"
+      name="diagnosis"
+      [(ngModel)]="newDiagnosis"
+      required
+      placeholder="Ex: Diabet, Alergii..."
+    />
+    <label for="date">Data diagnostic:</label>
+<input
+  type="date"
+  id="date"
+  name="date"
+  [(ngModel)]="diagnosisDate"
+  required
+/>
+    <button type="submit" [disabled]="!newDiagnosis">Adaugă</button>
+  </form>
+</div>
+
+<div class="dialog-actions">
+  <button (click)="close()" class="close-btn">Închide</button>
+</div>

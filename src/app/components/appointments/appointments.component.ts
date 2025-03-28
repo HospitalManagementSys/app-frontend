@@ -11,6 +11,7 @@ import { SnackBarService } from '../../services/snack-bar.service';
 import { ActivatedRoute } from '@angular/router';
 import { StatusTranslationService } from '../../services/translation.service';
 import { FormsModule } from '@angular/forms';
+import { MedicalHistoryComponent } from '../medical-history/medical-history.component';
 
 @Component({
   selector: 'app-appointments',
@@ -124,5 +125,12 @@ export class AppointmentsComponent implements OnInit {
   onDateFilterChange(event: string | null): void {
     this.dateFilter = event;
     this.applyFilters();
+  }
+
+  openMedicalHistory(appointment: Appointment): void {
+    this.dialog.open(MedicalHistoryComponent, {
+      width: '600px',
+      data: { patientId: appointment.patientId },
+    });
   }
 }

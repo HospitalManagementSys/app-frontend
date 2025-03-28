@@ -1,0 +1,72 @@
+
+
+   .dialog-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+  .dialog-content {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 0.5rem;
+  }
+  
+  .history-entry {
+    background-color: #f5f7fa;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-left: 4px solid #3f51b5;
+    border-radius: 4px;
+    font-size: 0.95rem;
+  }
+  
+  .no-history {
+    font-style: italic;
+    color: #888;
+    text-align: center;
+  }
+  
+  .diagnosis-form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .diagnosis-form input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .diagnosis-form button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .diagnosis-form button:disabled {
+    background-color: #9e9e9e;
+    cursor: not-allowed;
+  }
+  
+  .dialog-actions {
+    text-align: right;
+    margin-top: 1rem;
+  }
+  
+  .close-btn {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
