@@ -14,10 +14,11 @@ import { Patient } from '../../models/patient.model';
 import { AuthService } from '../../services/auth.service';
 import { AppointmentsService } from '../../services/appointment.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-modal',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
 })
@@ -29,6 +30,7 @@ export class ModalComponent {
   id: number | null = null;
   patient: User | null = null;
   role: string | null = null;
+  price: number | null = null;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public datas: { appointment: Appointment },
@@ -57,7 +59,18 @@ export class ModalComponent {
   }
 
   onAccept(): void {
-    this.dialogRef.close({ status: 'Programat' });
+    //   this.dialogRef.close({ status: 'Programat' });
+    if (!this.price || this.price <= 0) {
+      alert('Te rog introdu un preț valid.');
+      return;
+    }
+
+    this.appointment.price = this.price;
+
+    this.dialogRef.close({
+      status: 'Programat',
+      price: this.appointment.price,
+    });
   }
 
   onPending(): void {

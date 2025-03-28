@@ -11,6 +11,7 @@ export class Appointment {
   startTime: string;
   endTime: string;
   date: string;
+  price?: number;
 
   // Relații cu alte modele (opționale)
   patient?: Patient;
@@ -28,7 +29,8 @@ export class Appointment {
     date: string,
     patient?: Patient,
     doctor?: Doctor,
-    office?: Office
+    office?: Office,
+    price?: number
   ) {
     this.appointmentId = appointmentId;
     this.patientId = patientId;
@@ -38,6 +40,7 @@ export class Appointment {
     this.startTime = startTime;
     this.endTime = endTime;
     this.date = date;
+    this.price = price;
 
     if (patient) this.patient = patient;
     if (doctor) this.doctor = doctor;

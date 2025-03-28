@@ -1,7 +1,20 @@
 <h3 class="dialog-title">Detalii Programare</h3>
 
+
 <div class="dialog-content">
+  <div *ngIf="role === 'Doctor' && appointment.status !== 'Programat' && appointment.status !== 'Respins'">
+    <label for="price">Preț consultație:</label>
+    <input
+      id="price"
+      type="number"
+      [(ngModel)]="price"
+      placeholder="Ex: 150"
+      min="0"
+      required
+    />
+  </div>
   <div class="details-grid">
+ 
     <div class="detail-item">
       <strong>Status</strong>
       <span>{{ appointment.status }}</span>
@@ -26,7 +39,7 @@
   *ngIf="role === 'Doctor'" 
     class="accept-btn" 
     (click)="onAccept()" 
-    [disabled]="appointment.status === 'Programat' || appointment.status === 'Anulat' || appointment.status ==='Respins'">
+    [disabled]="appointment.status === 'programat' || appointment.status === 'Anulat' || appointment.status ==='Respins'">
     Acceptă
   </button>
 
@@ -34,7 +47,7 @@
   *ngIf="role === 'Doctor'" 
     class="reject-btn" 
     (click)="onReject()" 
-    [disabled]="appointment.status === 'Programat' || appointment.status === 'Anulat' || appointment.status ==='Respins'">
+    [disabled]="appointment.status === 'programat' || appointment.status === 'Anulat' || appointment.status ==='Respins'">
     Respinge
   </button>
     <!-- Butonul de ștergere pentru Admin -->

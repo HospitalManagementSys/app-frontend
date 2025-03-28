@@ -48,8 +48,9 @@ export class AppointmentsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.updateStatus(appointment, result.status);
+        this.updateStatus(appointment, result.status, result.price);
       }
+      console.log(result.price);
     });
   }
 
@@ -78,18 +79,17 @@ export class AppointmentsComponent implements OnInit {
     });
   }
 
-  updateStatus(appointment: Appointment, status: string) {
+  updateStatus(appointment: Appointment, status: string, price?: number) {
     appointment.status = status;
+    if (price !== undefined) {
+      appointment.price = price;
+    }
 
     this.appointmentService
       .updateAppointment(appointment.appointmentId, appointment)
       .subscribe(
-        () => {
-          this.snackBarService.show('Am modificat cererea!', 'success');
-        },
-        () => {
-          this.snackBarService.show('Nu am modificat cererea!', 'error');
-        }
+        () => this.snackBarService.show('Am modificat cererea!', 'success'),
+        () => this.snackBarService.show('Nu am modificat cererea!', 'error')
       );
   }
 
