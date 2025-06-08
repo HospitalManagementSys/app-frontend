@@ -28,20 +28,22 @@ export class HomepageComponent implements OnInit {
   slides = [
     {
       imageUrl:
-        'https://mhospital.ro/wp-content/uploads/2022/04/pachet-M-Care-1.jpg',
+        //'https://mhospital.ro/wp-content/uploads/2022/04/pachet-M-Care-1.jpg',
+        'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       title: 'Bine ai venit la MedicaNova',
       description:
         'Echipa noastră de specialiști îți oferă tratamente personalizate, într-un mediu sigur și modern.',
     },
     {
-      imageUrl: 'https://mhospital.ro/wp-content/uploads/2022/04/gineco21.jpg',
+      imageUrl:
+        'https://images.unsplash.com/photo-1513224502586-d1e602410265?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       title: 'Servicii medicale avansate',
       description:
         'Investim constant în echipamente de top și în cele mai noi metode de diagnostic și tratament.',
     },
     {
       imageUrl:
-        'https://mhospital.ro/wp-content/uploads/2021/10/m-hospital-m-laborator-diagnostic-800x455-1.jpg',
+        'https://images.unsplash.com/photo-1504813184591-01572f98c85f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       title: 'Profesioniști dedicați sănătății tale',
       description:
         'Fiecare pacient este unic. Suntem aici să îți oferim cele mai bune soluții pentru sănătatea ta.',
