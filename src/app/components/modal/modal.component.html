@@ -39,7 +39,7 @@
   *ngIf="role === 'Doctor'" 
     class="accept-btn" 
     (click)="onAccept()" 
-    [disabled]="appointment.status === 'Programat' || appointment.status === 'Anulat' || appointment.status ==='Respins'">
+    [disabled]="appointment.status === 'programat' || appointment.status === 'anulat' || appointment.status ==='respins'">
     Acceptă
   </button>
 
@@ -47,7 +47,7 @@
   *ngIf="role === 'Doctor'" 
     class="reject-btn" 
     (click)="onReject()" 
-    [disabled]="appointment.status === 'Programat' || appointment.status === 'Anulat' || appointment.status ==='Respins'">
+    [disabled]="appointment.status === 'programat' || appointment.status === 'anulat' || appointment.status ==='respins'">
     Respinge
   </button>
     <!-- Butonul de ștergere pentru Admin -->
